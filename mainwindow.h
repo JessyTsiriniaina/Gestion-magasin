@@ -91,6 +91,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void resizeEvent(QResizeEvent *);
 
     void remplirProduitDisponible(const QList<Produit>& produits);
     void remplirUniteDeMesure(int id_produit);

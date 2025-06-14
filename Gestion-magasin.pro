@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     controllers/controleurclient.cpp \
     controllers/controleurproduit.cpp \
     controllers/controleurvente.cpp \
-    controllers/controleurrapport.cpp
+    controllers/controleurrapport.cpp \
+    ui/horizontaltabstyle.cpp
 
 HEADERS  += mainwindow.h \
     database/databasemanager.h \
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     controllers/controleurclient.h \
     controllers/controleurproduit.h \
     controllers/controleurvente.h \
-    controllers/controleurrapport.h
+    controllers/controleurrapport.h \
+    ui/horizontaltabstyle.h
 
 FORMS    += mainwindow.ui \
     gestionproduitdialog.ui \

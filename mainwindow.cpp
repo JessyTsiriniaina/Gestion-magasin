@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "database/databasemanager.h"
-
+#include "ui/horizontaltabstyle.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -19,6 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+
+    ui->mainTabWidget->setTabPosition(QTabWidget::West);  // Onglets à gauche
+    ui->mainTabWidget->tabBar()->setStyle(new HorizontalTabStyle);
+    ui->mainTabWidget->tabBar()->setExpanding(false);
+    ui->mainTabWidget->tabBar()->setMinimumHeight(ui->mainTabWidget->height());
 
     ui->mainTabWidget->setCurrentIndex(0); //Ouvre l'application à la tab vente (pseudo home)
 
@@ -83,6 +88,12 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+    ui->mainTabWidget->tabBar()->setMinimumHeight(ui->mainTabWidget->height());
 }
 
 
@@ -431,6 +442,7 @@ void MainWindow::on_bouton_ajouter_au_panier_clicked()
 
 void MainWindow::on_input_montant_remise_textChanged(const QString &arg1)
 {
+    Q_UNUSED(arg1);
     if (!m_controleurVente) return;
 
     if (ui->spin_box_taux_remise->value() == 0 && !ui->input_montant_remise->isReadOnly()) {
@@ -671,6 +683,7 @@ void MainWindow::on_radio_button_par_client_clicked()
 
 void MainWindow::on_input_rechercher_client_2_textChanged(const QString &text)
 {
+    Q_UNUSED(text);
     chargerTableClient();
 }
 
@@ -733,6 +746,7 @@ void MainWindow::on_bouton_ajouter_produit_clicked()
 
 void MainWindow::on_input_rechercher_produit_textChanged(const QString &arg1)
 {
+    Q_UNUSED(arg1);
     chargerTableProduit();
 }
 
