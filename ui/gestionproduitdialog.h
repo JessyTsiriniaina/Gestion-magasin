@@ -27,6 +27,8 @@ private slots:
 
     void on_bouton_supprimer_unite_clicked();
 
+    void on_table_view_unite_vente_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::GestionProduitDialog *ui;
     GestionUniteVenteDialog *m_gestionUniteVenteDialog;

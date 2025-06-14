@@ -5,7 +5,7 @@ QSize HorizontalTabStyle::sizeFromContents(ContentsType type, const QStyleOption
 {
     QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
     if (type == CT_TabBarTab)
-        return QSize(200, 40);
+        return QSize(200, 50);
     return s;
 }
 

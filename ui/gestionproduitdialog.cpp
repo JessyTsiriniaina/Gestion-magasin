@@ -336,3 +336,9 @@ void GestionProduitDialog::on_bouton_supprimer_unite_clicked()
          QMessageBox::critical(this, "Erreur", "Unité (ID: " + QString::number(unitIdInTable) + ") introuvable dans la liste local pour la suppression.");
     }
 }
+
+void GestionProduitDialog::on_table_view_unite_vente_doubleClicked(const QModelIndex &index)
+{
+    Q_UNUSED(index);
+    on_bouton_modifier_unite_clicked();
+}

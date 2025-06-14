@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1000</width>
     <height>740</height>
    </rect>
   </property>
@@ -27,9 +27,14 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: &quot;Outfit&quot;;
-background-color:rgb(244, 247, 255);</string>
+background-color:rgb(244, 247, 255);
+
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTabWidget" name="mainTabWidget">
@@ -55,26 +60,32 @@ background-color:rgb(244, 247, 255);</string>
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">QTabBar::tab {background-color: rgb(216, 228, 255);}
+       <string notr="true">QTabWidget {border: none}
 
+QTabBar {
+	background-color: rgba(120, 203, 160, 30);
+}
 
-QTabBar::tab:selected { background-color: rgb(87, 182, 255); color: white; /*border: 2px solid  rgb(87, 182, 255);*/ font: bold;}
+QTabBar::tab {
+	background: transparent;
+	font: 13pt;
+}
 
-QTabBar::tab:hover {background-color: rgb(171, 209, 255);}
-
-
-QTabBar {background-color: rgb(216, 228, 255);}</string>
+QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold;}</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
       <property name="iconSize">
        <size>
-        <width>16</width>
-        <height>16</height>
+        <width>30</width>
+        <height>30</height>
        </size>
       </property>
       <property name="elideMode">
@@ -86,12 +97,27 @@ QTabBar {background-color: rgb(216, 228, 255);}</string>
       <widget class="QWidget" name="tab_vente">
        <attribute name="icon">
         <iconset resource="resources/resources.qrc">
-         <normaloff>:/icons/icons/shopping-cart.svg</normaloff>:/icons/icons/shopping-cart.svg</iconset>
+         <normaloff>:/icons/icons/shopping-cart.svg</normaloff>
+         <activeon>:/icons/icons/shopping-cart-active.svg</activeon>
+         <selectedon>:/icons/icons/shopping-cart-active.svg</selectedon>:/icons/icons/shopping-cart.svg</iconset>
        </attribute>
        <attribute name="title">
         <string>Vente</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="styleSheet">
+           <string notr="true">QLabel {font: bold 16pt  &quot;Outfit&quot;;}</string>
+          </property>
+          <property name="text">
+           <string>Enregistrement de nouvelles ventes</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QGroupBox" name="group_box_client">
           <property name="font">
@@ -100,8 +126,14 @@ QTabBar {background-color: rgb(216, 228, 255);}</string>
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {border: none; border-radius: 4px;}</string>
+          </property>
           <property name="title">
-           <string>Client (optionnel)</string>
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
           </property>
           <layout class="QFormLayout" name="formLayout">
            <item row="0" column="0">
@@ -135,7 +167,15 @@ QTabBar {background-color: rgb(216, 228, 255);}</string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
              </property>
             </widget>
            </item>
@@ -176,8 +216,29 @@ QTabBar {background-color: rgb(216, 228, 255);}</string>
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:1px solid grey;
-padding: 2px 4px</string>
+              <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}</string>
              </property>
             </widget>
            </item>
@@ -192,16 +253,20 @@ padding: 2px 4px</string>
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {border: none; border-radius: 4px;}</string>
+          </property>
           <property name="title">
-           <string>Ajouter une produit au panier</string>
+           <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_ProductSelection">
            <item row="3" column="2">
             <widget class="QPushButton" name="bouton_ajouter_au_panier">
              <property name="font">
               <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <italic>false</italic>
+               <bold>true</bold>
               </font>
              </property>
              <property name="cursor">
@@ -209,13 +274,18 @@ padding: 2px 4px</string>
              </property>
              <property name="styleSheet">
               <string notr="true">
-QPushButton {background-color:  rgb(87, 182, 255);  padding: 5px 10px; border: none; border-radius: 4px;}
-
-QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
 }
 
-</string>
+QPushButton:hover {
+	background-color:  rgba(87, 182, 255, 80) ; 
+}</string>
              </property>
              <property name="text">
               <string>Ajouter au panier</string>
@@ -237,8 +307,29 @@ QPushButton:hover {
               <string>Select unit for the chosen product</string>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:1px solid grey;
-padding: 2px 4px</string>
+              <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}</string>
              </property>
             </widget>
            </item>
@@ -296,8 +387,29 @@ padding: 2px 4px</string>
               <string>Matching products will appear here</string>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:1px solid grey;
-padding: 2px 4px</string>
+              <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}</string>
              </property>
             </widget>
            </item>
@@ -308,6 +420,47 @@ padding: 2px 4px</string>
                <family>Outfit</family>
                <pointsize>10</pointsize>
               </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QDoubleSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+    background: white;
+}
+QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDoubleSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
              </property>
              <property name="decimals">
               <number>3</number>
@@ -331,6 +484,17 @@ padding: 2px 4px</string>
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+             </property>
             </widget>
            </item>
           </layout>
@@ -344,12 +508,24 @@ padding: 2px 4px</string>
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="title">
            <string>Panier</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_SaleItems">
            <item>
             <widget class="QTableView" name="table_view_panier">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>Outfit</family>
@@ -360,7 +536,9 @@ padding: 2px 4px</string>
               <string notr="true">QHeaderView::section:horizontal {
 	background-color: rgb(122, 194, 145); padding: 4px; border: none; border-left: 0.5px solid rgb(65, 103, 70); color: rgb(246, 255, 249)
 
-}</string>
+}
+
+QTableView {border: none}</string>
              </property>
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
@@ -404,19 +582,27 @@ padding: 2px 4px</string>
               <widget class="QPushButton" name="bouton_supprimer_du_panier">
                <property name="font">
                 <font>
-                 <family>Outfit</family>
-                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton {background-color:   rgb(255, 152, 152);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+                <string notr="true">
+QPushButton {
+background-color:  rgba(255, 152, 152, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(255, 64, 64);
+border-radius: 4px;
+color:  rgb(255, 64, 64); 
+font: bold;
+}
 
- QPushButton:hover {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 152, 152, 255), stop:1 rgba(255, 77, 77, 255)); 
+QPushButton:hover {
+	background-color:   rgba(255, 152, 152, 80) ; 
 }</string>
                </property>
                <property name="text">
@@ -437,8 +623,11 @@ padding: 5px 10px; border: none; border-radius: 4px;}
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {border: none; border-radius: 4px;}</string>
+          </property>
           <property name="title">
-           <string>Totales</string>
+           <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_Totals">
            <item row="0" column="0">
@@ -475,6 +664,17 @@ padding: 5px 10px; border: none; border-radius: 4px;}
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+             </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -490,6 +690,47 @@ padding: 5px 10px; border: none; border-radius: 4px;}
                <family>Outfit</family>
                <pointsize>10</pointsize>
               </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QDoubleSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+    background: white;
+}
+QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDoubleSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -523,6 +764,17 @@ padding: 5px 10px; border: none; border-radius: 4px;}
              <property name="toolTip">
               <string>Calculated from percentage, or can be entered directly if percentage is zero.</string>
              </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+             </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -536,6 +788,17 @@ padding: 5px 10px; border: none; border-radius: 4px;}
                <italic>false</italic>
                <bold>false</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -584,19 +847,28 @@ padding: 5px 10px; border: none; border-radius: 4px;}
               <widget class="QPushButton" name="bouton_annuler">
                <property name="font">
                 <font>
-                 <family>Outfit</family>
-                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton {background-color:  rgb(217, 217, 217);
-padding: 5px 10px; border: none; border-radius: 4px;}
+                <string notr="true">
+
+QPushButton {
+background-color:  rgba(217, 217, 217, 100);
+ padding: 5px 10px;
+ border: 2px solid rgb(102, 102, 102);
+border-radius: 4px;
+color:   rgb(102, 102, 102); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(217, 217, 217, 255), stop:1 rgba(195, 195, 195, 255)); 
+	background-color:    rgba(217, 217, 217, 150) ; 
 }</string>
                </property>
                <property name="text">
@@ -608,19 +880,27 @@ QPushButton:hover {
               <widget class="QPushButton" name="bouton_finaliser">
                <property name="font">
                 <font>
-                 <family>Outfit</family>
-                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+                <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
                </property>
                <property name="text">

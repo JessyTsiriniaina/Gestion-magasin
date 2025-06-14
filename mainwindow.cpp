@@ -9,6 +9,7 @@
 #include <QDialog>
 #include <QLocale>
 #include <QVariantMap>
+#include <QGraphicsDropShadowEffect>
 
 
 
@@ -37,6 +38,14 @@ MainWindow::MainWindow(QWidget *parent) :
          QMessageBox::critical(this, "Erreur base de données", "Echec lors de la connexion à la base de données");
          return;
     }
+
+
+
+
+    ui->group_box_client->setGraphicsEffect(createShadow());
+    ui->group_box_ajouter_produit_panier->setGraphicsEffect(createShadow());
+    ui->group_box_panier->setGraphicsEffect(createShadow());
+    ui->group_box_totales->setGraphicsEffect(createShadow());
 
 
 
@@ -94,6 +103,16 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
     QMainWindow::resizeEvent(event);
     ui->mainTabWidget->tabBar()->setMinimumHeight(ui->mainTabWidget->height());
+}
+
+QGraphicsDropShadowEffect * MainWindow::createShadow()
+{
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
+    effect->setBlurRadius(8);
+    effect->setXOffset(0);
+    effect->setYOffset(1);
+    effect->setColor(QColor(0, 0, 0, 40));
+    return effect;
 }
 
 
@@ -732,6 +751,13 @@ void MainWindow::on_bouton_supprimer_client_clicked()
 }
 
 
+void MainWindow::on_tableView_clients_doubleClicked(const QModelIndex &index)
+{
+    Q_UNUSED(index);
+    on_bouton_modifier_client_clicked();
+}
+
+
 
 //-------------- PRODUIT TAB SLOT -----------------
 
@@ -806,3 +832,9 @@ void MainWindow::on_bouton_reapprovisionner_produit_clicked()
     if (dialog.exec() == QDialog::Accepted) chargerTableProduit();
 }
 
+
+void MainWindow::on_tableView_produits_doubleClicked(const QModelIndex &index)
+{
+    Q_UNUSED(index);
+    on_bouton_modifier_produit_clicked();
+}
