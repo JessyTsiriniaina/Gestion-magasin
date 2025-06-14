@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>fonts/Outfit-Regular.ttf</file>
+        <file>fonts/Outfit-Bold.ttf</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/users.svg</file>
+        <file>icons/list-alt.svg</file>
+        <file>icons/file-invoice.svg</file>
+        <file>icons/shopping-cart.svg</file>
+    </qresource>
+</RCC>
