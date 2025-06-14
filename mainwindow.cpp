@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "database/databasemanager.h"
 
+
 #include <QDebug>
 #include <QMessageBox>
 #include <QModelIndexList>
@@ -19,9 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-
-
     ui->mainTabWidget->setCurrentIndex(0); //Ouvre l'application à la tab vente (pseudo home)
+
+
     ui->combo_box_liste_client->clear();
     ui->combo_box_liste_client->addItem("Client temporaire", QVariant(0));
 

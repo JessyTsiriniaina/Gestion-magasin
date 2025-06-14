@@ -192,8 +192,12 @@
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}</string>
+           <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  padding: 5px 10px; border: none; border-radius: 4px;}
+
+QPushButton:hover {
+	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+}
+</string>
           </property>
           <property name="text">
            <string>Ajouter un unité</string>
@@ -212,8 +216,12 @@ padding: 5px 10px; border: none; border-radius: 4px;}</string>
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}</string>
+           <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  padding: 5px 10px; border: none; border-radius: 4px;}
+
+QPushButton:hover {
+	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+}
+</string>
           </property>
           <property name="text">
            <string>Modifier l'unité</string>
@@ -233,7 +241,11 @@ padding: 5px 10px; border: none; border-radius: 4px;}</string>
           </property>
           <property name="styleSheet">
            <string notr="true">QPushButton {background-color:   rgb(255, 152, 152);  
-padding: 5px 10px; border: none; border-radius: 4px;}</string>
+padding: 5px 10px; border: none; border-radius: 4px;}
+
+ QPushButton:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 152, 152, 255), stop:1 rgba(255, 77, 77, 255)); 
+}</string>
           </property>
           <property name="text">
            <string>Supprimer l'unité</string>
@@ -272,8 +284,12 @@ padding: 5px 10px; border: none; border-radius: 4px;}</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color:    rgb(217, 217, 217);  
-padding: 5px 10px; border: none; border-radius: 4px;}</string>
+        <string notr="true">QPushButton {background-color:  rgb(217, 217, 217);
+padding: 5px 10px; border: none; border-radius: 4px;}
+
+QPushButton:hover {
+	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(217, 217, 217, 255), stop:1 rgba(195, 195, 195, 255)); 
+}</string>
        </property>
        <property name="text">
         <string>Annuler</string>
@@ -292,8 +308,12 @@ padding: 5px 10px; border: none; border-radius: 4px;}</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}</string>
+        <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  padding: 5px 10px; border: none; border-radius: 4px;}
+
+QPushButton:hover {
+	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+}
+</string>
        </property>
        <property name="text">
         <string>Enregistrer</string>
