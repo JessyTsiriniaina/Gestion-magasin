@@ -37,6 +37,17 @@
          <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+       </property>
        <property name="placeholderText">
         <string>exemple: kg, kapoka, sac </string>
        </property>
@@ -68,6 +79,43 @@
        </property>
        <property name="toolTip">
         <string>How many base units are in this selling unit? (e.g., if base is Kg and this unit is 'Gram', factor is 0.001. If this unit is '5 Kg Bag', factor is 5)</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QDoubleSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDoubleSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
        </property>
        <property name="decimals">
         <number>4</number>
@@ -106,6 +154,43 @@
          <family>Outfit</family>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QDoubleSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDoubleSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
        </property>
        <property name="decimals">
         <number>2</number>
@@ -155,19 +240,28 @@
       <widget class="QPushButton" name="bouton_annuler">
        <property name="font">
         <font>
-         <family>Outfit</family>
-         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
         </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color:  rgb(217, 217, 217);
-padding: 5px 10px; border: none; border-radius: 4px;}
+        <string notr="true">
+
+QPushButton {
+background-color:  rgba(217, 217, 217, 100);
+ padding: 5px 10px;
+ border: 2px solid rgb(102, 102, 102);
+border-radius: 4px;
+color:   rgb(102, 102, 102); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(217, 217, 217, 255), stop:1 rgba(195, 195, 195, 255)); 
+	background-color:    rgba(217, 217, 217, 150) ; 
 }</string>
        </property>
        <property name="text">
@@ -179,20 +273,28 @@ QPushButton:hover {
       <widget class="QPushButton" name="bouton_enregistrer">
        <property name="font">
         <font>
-         <family>Outfit</family>
-         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
         </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  padding: 5px 10px; border: none; border-radius: 4px;}
+        <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
-}
-</string>
+	background-color:  rgba(87, 182, 255, 80) ; 
+}</string>
        </property>
        <property name="text">
         <string>Enregistrer</string>

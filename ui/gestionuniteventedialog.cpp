@@ -9,6 +9,7 @@ GestionUniteVenteDialog::GestionUniteVenteDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     connect(ui->bouton_annuler,
             &QPushButton::clicked,
             this,

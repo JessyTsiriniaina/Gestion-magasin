@@ -27,9 +27,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: &quot;Outfit&quot;;
-background-color:rgb(244, 247, 255);
-
-</string>
+background-color:rgb(244, 247, 255);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
@@ -63,7 +61,7 @@ background-color:rgb(244, 247, 255);
        <string notr="true">QTabWidget {border: none}
 
 QTabBar {
-	background-color: rgba(120, 203, 160, 30);
+	background-color: rgba(120, 203, 160, 40);
 }
 
 QTabBar::tab {
@@ -71,7 +69,7 @@ QTabBar::tab {
 	font: 13pt;
 }
 
-QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold;}</string>
+QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-color:  rgba(255, 255, 255, 180)}</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
@@ -80,7 +78,7 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold;}</string>
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -97,9 +95,7 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold;}</string>
       <widget class="QWidget" name="tab_vente">
        <attribute name="icon">
         <iconset resource="resources/resources.qrc">
-         <normaloff>:/icons/icons/shopping-cart.svg</normaloff>
-         <activeon>:/icons/icons/shopping-cart-active.svg</activeon>
-         <selectedon>:/icons/icons/shopping-cart-active.svg</selectedon>:/icons/icons/shopping-cart.svg</iconset>
+         <normaloff>:/icons/icons/shopping-cart.png</normaloff>:/icons/icons/shopping-cart.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Vente</string>
@@ -108,7 +104,8 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold;}</string>
         <item>
          <widget class="QLabel" name="label_6">
           <property name="styleSheet">
-           <string notr="true">QLabel {font: bold 16pt  &quot;Outfit&quot;;}</string>
+           <string notr="true">QLabel {font: bold 16pt  &quot;Outfit&quot;; }
+</string>
           </property>
           <property name="text">
            <string>Enregistrement de nouvelles ventes</string>
@@ -429,7 +426,6 @@ QComboBox::down-arrow:on {
     border: 1px solid #CCCCCC;
     border-radius: 3px;
     padding: 2px 5px;
-    background: white;
 }
 QDoubleSpinBox::up-button {
     subcontrol-origin: border;
@@ -699,7 +695,6 @@ border: 1px solid rgb(85, 170, 255);
     border: 1px solid #CCCCCC;
     border-radius: 3px;
     padding: 2px 5px;
-    background: white;
 }
 QDoubleSpinBox::up-button {
     subcontrol-origin: border;
@@ -926,7 +921,7 @@ QPushButton:hover {
        </property>
        <attribute name="icon">
         <iconset resource="resources/resources.qrc">
-         <normaloff>:/icons/icons/file-invoice.svg</normaloff>:/icons/icons/file-invoice.svg</iconset>
+         <normaloff>:/icons/icons/file-invoice.png</normaloff>:/icons/icons/file-invoice.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Rapport</string>
@@ -984,8 +979,11 @@ QPushButton:hover {
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {border: none; border-radius: 4px;}</string>
+          </property>
           <property name="title">
-           <string>Sélection et paramètre du rapport</string>
+           <string/>
           </property>
           <property name="flat">
            <bool>false</bool>
@@ -1022,8 +1020,30 @@ QPushButton:hover {
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:1px solid grey;
-padding: 2px 4px</string>
+              <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}
+</string>
              </property>
              <item>
               <property name="text">
@@ -1102,6 +1122,43 @@ padding: 2px 4px</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">QDateEdit {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDateEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDateEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDateEdit::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
+                 </property>
                 </widget>
                </item>
                <item row="3" column="0" colspan="2">
@@ -1141,6 +1198,43 @@ padding: 2px 4px</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">QSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
+                 </property>
                  <property name="maximum">
                   <number>999999999</number>
                  </property>
@@ -1171,9 +1265,29 @@ padding: 2px 4px</string>
                   <cursorShape>PointingHandCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">border:1px solid grey;
-padding: 2px 4px;
-</string>
+                  <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}</string>
                  </property>
                 </widget>
                </item>
@@ -1214,6 +1328,17 @@ padding: 2px 4px;
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+                 </property>
                 </widget>
                </item>
                <item row="8" column="0">
@@ -1241,8 +1366,29 @@ padding: 2px 4px;
                   <cursorShape>PointingHandCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">border:1px solid grey;
-padding: 2px 4px</string>
+                  <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}</string>
                  </property>
                 </widget>
                </item>
@@ -1253,6 +1399,43 @@ padding: 2px 4px</string>
                    <family>Outfit</family>
                    <pointsize>10</pointsize>
                   </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QDateEdit {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDateEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDateEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDateEdit::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
                  </property>
                 </widget>
                </item>
@@ -1281,6 +1464,43 @@ padding: 2px 4px</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">QDateEdit {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDateEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDateEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDateEdit::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="0">
@@ -1304,6 +1524,43 @@ padding: 2px 4px</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">QDateEdit {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDateEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDateEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDateEdit::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDateEdit::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
+                 </property>
                 </widget>
                </item>
                <item row="2" column="0">
@@ -1326,6 +1583,43 @@ padding: 2px 4px</string>
                    <family>Outfit</family>
                    <pointsize>10</pointsize>
                   </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
                  </property>
                  <property name="minimum">
                   <number>1</number>
@@ -1363,6 +1657,43 @@ padding: 2px 4px</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">QDoubleSpinBox {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+   background: #cccccc;
+}
+QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 16px;
+    border-left: 1px solid #CCCCCC;
+    background: #cccccc;
+}
+QDoubleSpinBox::up-arrow {
+    image: url(:/icons/icons/caret-up.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QDoubleSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background: #66BB6A;
+}
+QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background: #388E3C; 
+}</string>
+                 </property>
                  <property name="decimals">
                   <number>3</number>
                  </property>
@@ -1379,19 +1710,27 @@ padding: 2px 4px</string>
             <widget class="QPushButton" name="boutton_generer_rapport">
              <property name="font">
               <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <italic>false</italic>
+               <bold>true</bold>
               </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+              <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
              </property>
              <property name="text">
@@ -1413,6 +1752,9 @@ QPushButton:hover {
           <property name="title">
            <string>Résultat du rapport</string>
           </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
           <layout class="QVBoxLayout" name="verticalLayout_ReportDisplay">
            <item>
             <widget class="QTableView" name="table_view_resultat_rapport">
@@ -1426,7 +1768,9 @@ QPushButton:hover {
               <string notr="true">QHeaderView::section:horizontal {
 	background-color: rgb(122, 194, 145); padding: 4px; border: none; border-left: 0.5px solid rgb(65, 103, 70); color: rgb(246, 255, 249)
 
-}</string>
+}
+
+QTableView {border: none;}</string>
              </property>
              <property name="locale">
               <locale language="French" country="France"/>
@@ -1467,7 +1811,7 @@ QPushButton:hover {
        </property>
        <attribute name="icon">
         <iconset resource="resources/resources.qrc">
-         <normaloff>:/icons/icons/users.svg</normaloff>:/icons/icons/users.svg</iconset>
+         <normaloff>:/icons/icons/address-book.png</normaloff>:/icons/icons/address-book.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Client</string>
@@ -1539,6 +1883,17 @@ QPushButton:hover {
               <pointsize>10</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -1549,7 +1904,9 @@ QPushButton:hover {
            <string notr="true">QHeaderView::section:horizontal {
 	background-color: rgb(122, 194, 145); padding: 4px; border: none; border-left: 0.5px solid rgb(65, 103, 70); color: rgb(246, 255, 249)
 
-}</string>
+}
+
+QTableView {border: none;}</string>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -1587,19 +1944,27 @@ QPushButton:hover {
            <widget class="QPushButton" name="bouton_ajouter_client">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+             <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
             </property>
             <property name="text">
@@ -1611,19 +1976,27 @@ QPushButton:hover {
            <widget class="QPushButton" name="bouton_modifier_client">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+             <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
             </property>
             <property name="text">
@@ -1635,19 +2008,27 @@ QPushButton:hover {
            <widget class="QPushButton" name="bouton_supprimer_client">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:   rgb(255, 152, 152);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+             <string notr="true">
+QPushButton {
+background-color:  rgba(255, 152, 152, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(255, 64, 64);
+border-radius: 4px;
+color:  rgb(255, 64, 64); 
+font: bold;
+}
 
- QPushButton:hover {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 152, 152, 255), stop:1 rgba(255, 77, 77, 255)); 
+QPushButton:hover {
+	background-color:   rgba(255, 152, 152, 80) ; 
 }</string>
             </property>
             <property name="text">
@@ -1665,7 +2046,7 @@ padding: 5px 10px; border: none; border-radius: 4px;}
        </property>
        <attribute name="icon">
         <iconset resource="resources/resources.qrc">
-         <normaloff>:/icons/icons/list-alt.svg</normaloff>:/icons/icons/list-alt.svg</iconset>
+         <normaloff>:/icons/icons/list-alt.png</normaloff>:/icons/icons/list-alt.png</iconset>
        </attribute>
        <attribute name="title">
         <string>Produit</string>
@@ -1737,6 +2118,17 @@ padding: 5px 10px; border: none; border-radius: 4px;}
               <pointsize>10</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -1747,7 +2139,9 @@ padding: 5px 10px; border: none; border-radius: 4px;}
            <string notr="true">QHeaderView::section:horizontal {
 	background-color: rgb(122, 194, 145); padding: 4px; border: none; border-left: 0.5px solid rgb(65, 103, 70); color: rgb(246, 255, 249)
 
-}</string>
+}
+
+QTableView {border: none;}</string>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -1788,20 +2182,27 @@ padding: 5px 10px; border: none; border-radius: 4px;}
            <widget class="QPushButton" name="bouton_ajouter_produit">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
-
+             <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
             </property>
             <property name="text">
@@ -1813,20 +2214,27 @@ QPushButton:hover {
            <widget class="QPushButton" name="bouton_modifier_produit">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
-
+             <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
             </property>
             <property name="text">
@@ -1838,19 +2246,27 @@ QPushButton:hover {
            <widget class="QPushButton" name="bouton_supprimer_produit">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:   rgb(255, 152, 152);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+             <string notr="true">
+QPushButton {
+background-color:  rgba(255, 152, 152, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(255, 64, 64);
+border-radius: 4px;
+color:  rgb(255, 64, 64); 
+font: bold;
+}
 
- QPushButton:hover {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 152, 152, 255), stop:1 rgba(255, 77, 77, 255)); 
+QPushButton:hover {
+	background-color:   rgba(255, 152, 152, 80) ; 
 }</string>
             </property>
             <property name="text">
@@ -1862,19 +2278,27 @@ padding: 5px 10px; border: none; border-radius: 4px;}
            <widget class="QPushButton" name="bouton_reapprovisionner_produit">
             <property name="font">
              <font>
-              <family>Outfit</family>
-              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  
-padding: 5px 10px; border: none; border-radius: 4px;}
+             <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
+	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
             </property>
             <property name="text">

@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QList>
-#include <QGraphicsDropShadowEffect>
 
 #include "ui/gestionclientdialog.h"
 #include "ui/gestionproduitdialog.h"
@@ -97,7 +96,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void resizeEvent(QResizeEvent *);
-    QGraphicsDropShadowEffect *createShadow();
 
     void remplirProduitDisponible(const QList<Produit>& produits);
     void remplirUniteDeMesure(int id_produit);

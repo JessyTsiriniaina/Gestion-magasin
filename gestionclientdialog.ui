@@ -25,8 +25,11 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox {border: none; border-radius: 4px;}</string>
+     </property>
      <property name="title">
-      <string>Details du client</string>
+      <string/>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
@@ -50,6 +53,17 @@
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -72,6 +86,17 @@
           <family>Outfit</family>
           <pointsize>10</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
         </property>
        </widget>
       </item>
@@ -110,19 +135,28 @@
       <widget class="QPushButton" name="bouton_annuler">
        <property name="font">
         <font>
-         <family>Outfit</family>
-         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
         </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color:  rgb(217, 217, 217);
-padding: 5px 10px; border: none; border-radius: 4px;}
+        <string notr="true">
+
+QPushButton {
+background-color:  rgba(217, 217, 217, 100);
+ padding: 5px 10px;
+ border: 2px solid rgb(102, 102, 102);
+border-radius: 4px;
+color:   rgb(102, 102, 102); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(217, 217, 217, 255), stop:1 rgba(195, 195, 195, 255)); 
+	background-color:    rgba(217, 217, 217, 150) ; 
 }</string>
        </property>
        <property name="text">
@@ -134,20 +168,28 @@ QPushButton:hover {
       <widget class="QPushButton" name="bouton_enregistrer">
        <property name="font">
         <font>
-         <family>Outfit</family>
-         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
         </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color:  rgb(87, 182, 255);  padding: 5px 10px; border: none; border-radius: 4px;}
+        <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
 
 QPushButton:hover {
-	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(125, 208, 146, 255)); 
-}
-</string>
+	background-color:  rgba(87, 182, 255, 80) ; 
+}</string>
        </property>
        <property name="text">
         <string>Enregistrer</string>

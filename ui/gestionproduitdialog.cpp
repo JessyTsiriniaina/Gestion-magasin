@@ -2,6 +2,7 @@
 #include "ui_gestionproduitdialog.h"
 
 #include "ui/gestionuniteventedialog.h"
+#include "shadoweffect.h"
 
 
 #include <QStandardItemModel>
@@ -47,6 +48,10 @@ GestionProduitDialog::GestionProduitDialog(QWidget *parent, ControleurProduit* c
     }
 
     remplirTableUnitesVente();
+
+
+    ui->groupBox_detail_produit->setGraphicsEffect(ShadowEffect::createShadow(this));
+    ui->groupBox_unite_vente->setGraphicsEffect(ShadowEffect::createShadow(this));
 
     connect(ui->bouton_annuler,
             &QPushButton::clicked,

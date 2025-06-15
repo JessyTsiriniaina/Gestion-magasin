@@ -1,6 +1,7 @@
 #include "reapprovisionnerstockdialog.h"
 #include "ui_reapprovisionnerstockdialog.h"
 
+
 #include <QMessageBox>
 #include <QDebug>
 
@@ -30,6 +31,7 @@ ReapprovisionnerStockDialog::ReapprovisionnerStockDialog(QWidget *parent, Contro
     ui->label_nom_produit->setText(m_produit.nom_produit);
     ui->label_unite_de_base->setText(m_produit.unite_base);
     ui->spin_box_quantite_ajouter->setFocus();
+
 
 
 

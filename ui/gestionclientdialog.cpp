@@ -1,5 +1,6 @@
 #include "gestionclientdialog.h"
 #include "ui_gestionclientdialog.h"
+#include "shadoweffect.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -26,6 +27,8 @@ GestionClientDialog::GestionClientDialog(QWidget *parent, ControleurClient* cont
     } else { // Nouveau client
         setWindowTitle("Ajouter nouveau client");
     }
+
+    ui->groupBox_details_client->setGraphicsEffect(ShadowEffect::createShadow(this));
 
     connect(ui->bouton_annuler,
             &QPushButton::clicked,

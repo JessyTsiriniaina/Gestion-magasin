@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "database/databasemanager.h"
 #include "ui/horizontaltabstyle.h"
+#include "ui/shadoweffect.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -42,10 +43,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    ui->group_box_client->setGraphicsEffect(createShadow());
-    ui->group_box_ajouter_produit_panier->setGraphicsEffect(createShadow());
-    ui->group_box_panier->setGraphicsEffect(createShadow());
-    ui->group_box_totales->setGraphicsEffect(createShadow());
+    ui->group_box_client->setGraphicsEffect(ShadowEffect::createShadow(this));
+    ui->group_box_ajouter_produit_panier->setGraphicsEffect(ShadowEffect::createShadow(this));
+    ui->group_box_panier->setGraphicsEffect(ShadowEffect::createShadow(this));
+    ui->group_box_totales->setGraphicsEffect(ShadowEffect::createShadow(this));
+
+    ui->group_box_resultat_rapport->setGraphicsEffect(ShadowEffect::createShadow(this));
+    ui->group_box_selection_rapport->setGraphicsEffect(ShadowEffect::createShadow(this));
+    //ui->group_box_client->setGraphicsEffect(ShadowEffect::createShadow(this));
+    //ui->group_box_client->setGraphicsEffect(ShadowEffect::createShadow(this));
 
 
 
@@ -105,15 +111,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     ui->mainTabWidget->tabBar()->setMinimumHeight(ui->mainTabWidget->height());
 }
 
-QGraphicsDropShadowEffect * MainWindow::createShadow()
-{
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
-    effect->setBlurRadius(8);
-    effect->setXOffset(0);
-    effect->setYOffset(1);
-    effect->setColor(QColor(0, 0, 0, 40));
-    return effect;
-}
 
 
 
