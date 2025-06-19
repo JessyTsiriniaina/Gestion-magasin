@@ -24,8 +24,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->mainTabWidget->setTabPosition(QTabWidget::West);  // Onglets à gauche
     ui->mainTabWidget->tabBar()->setStyle(new HorizontalTabStyle);
+
+
+
+
+
+    //HAUTEUR VARIABLE
     ui->mainTabWidget->tabBar()->setExpanding(false);
     ui->mainTabWidget->tabBar()->setMinimumHeight(ui->mainTabWidget->height());
+
+
+
+
+
+
+
+
+
+
+
+
 
     ui->mainTabWidget->setCurrentIndex(0); //Ouvre l'application à la tab vente (pseudo home)
 
@@ -50,8 +68,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->group_box_resultat_rapport->setGraphicsEffect(ShadowEffect::createShadow(this));
     ui->group_box_selection_rapport->setGraphicsEffect(ShadowEffect::createShadow(this));
-    //ui->group_box_client->setGraphicsEffect(ShadowEffect::createShadow(this));
-    //ui->group_box_client->setGraphicsEffect(ShadowEffect::createShadow(this));
 
 
 
@@ -85,6 +101,7 @@ MainWindow::MainWindow(QWidget *parent) :
     configurerProduitTab();
     configurerPanierTable();
     configurerRapportTab();
+    raffraichirPanierTableView();
 
 
 
@@ -124,11 +141,12 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::remplirListeClient(QList<Client>& clients)
 {
     ui->combo_box_liste_client->clear();
-    ui->combo_box_liste_client->addItem("Client temporaire", 0);
+    ui->combo_box_liste_client->addItem("Client temporaire", QVariant::fromValue(0));
 
     foreach (const Client& client, clients) {
         ui->combo_box_liste_client->addItem(client.nom_client + " (ID: " + QString::number(client.id_client) + ")", QVariant::fromValue(client.id_client));
     }
+
     if (!clients.isEmpty()) {
         ui->combo_box_liste_client->setCurrentIndex(1);
     }
@@ -181,7 +199,7 @@ void MainWindow::raffraichirPanierTableView()
     if (!m_controleurVente) return;
     m_panierTableModel->clear();
     QStringList headers;
-    headers << "Nom produit" << "Unite" << "Qte" << "Prix/Unité" << "Subtotal";
+    headers << "Nom produit" << "Unité" << "Prix Unitaire" << "Quantité" << "Subtotal";
     m_panierTableModel->setHorizontalHeaderLabels(headers);
 
     const QList<AffichageElementPanier>& elementsPanier = m_controleurVente->getElementsPanier();
@@ -190,8 +208,8 @@ void MainWindow::raffraichirPanierTableView()
         QList<QStandardItem*> elementsLigne;
         elementsLigne.append(new QStandardItem(element.nom_produit));
         elementsLigne.append(new QStandardItem(element.nom_unite));
-        elementsLigne.append(new QStandardItem(QString::number(element.quantite_vendu, 'f', 3)));
         elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.prix_de_vente, "Ar")));
+        elementsLigne.append(new QStandardItem(QString::number(element.quantite_vendu, 'f', 3)));
         elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.subtotal_composant, "Ar")));
 
 
@@ -372,20 +390,30 @@ void MainWindow::on_input_rechercher_client_textChanged(const QString &arg1)
 {
     if (!m_controleurVente) return;
     m_clientTrouve = m_controleurVente->rechercherClient(arg1);
+
+
     remplirListeClient(m_clientTrouve);
+
+    //Ajouter un client au debut de la liste  pour le client temporaire
+    Client client;
+    client.id_client = 0;
+    client.nom_client = "Invalide";
+    client.telephone_client = "Invalide";
+    m_clientTrouve.prepend(client);
+
 }
 
 void MainWindow::on_combo_box_liste_client_currentIndexChanged(int index)
 {
     if (!m_controleurVente) return;
     int id_client = ui->combo_box_liste_client->itemData(index).toInt();
-    if(id_client > 0) {
-        foreach(const Client& client, m_clientTrouve) {
-            if(id_client == client.id_client) {
-                m_controleurVente->setClientCourant(client);
-            }
+
+    foreach(const Client& client, m_clientTrouve) {
+        if(id_client == client.id_client) {
+            m_controleurVente->setClientCourant(client);
         }
     }
+
 }
 
 //Recherche et ajout produit
@@ -545,6 +573,8 @@ void MainWindow::on_bouton_finaliser_clicked()
     } else {
         QMessageBox::critical(this, "Erreur", "Echec d'enregistement de vente.");
     }
+
+    on_bouton_annuler_clicked();
 }
 
 

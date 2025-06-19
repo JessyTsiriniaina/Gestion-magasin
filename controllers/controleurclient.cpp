@@ -80,6 +80,12 @@ bool ControleurClient::supprimerClient(int customerId)
     return m_modeleClient->supprimerClient(customerId);
 }
 
+bool ControleurClient::isTelephoneValide(QString telephone)
+{
+    QRegularExpression regex("^$|^(\\+261|0)(20|32|33|34|37|38|39)\\d{7}$");
+    return regex.match(telephone).hasMatch();
+}
+
 
 
 

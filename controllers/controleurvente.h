@@ -4,8 +4,18 @@
 #include <QObject>
 #include <QString>
 #include <QList>
-#include <QList>
 #include <QVariantMap>
+
+
+
+#include <QTextDocument>
+#include <QPrinter>
+#include <QDesktopServices>
+#include <QDir>
+#include <QFontDatabase>
+#include <QDebug>
+#include <QTextTable>
+#include <QDate>
 
 
 #include "models/client.h"
@@ -37,7 +47,6 @@ public:
     QList<Client>  rechercherClient(const QString& motCle);
     Client getClientById(int id_client);
     void setClientCourant(const Client& client);
-    void viderClient();
 
 
     //--------- Gestion produit ----------------------
@@ -60,7 +69,7 @@ public:
 
     //--------- Finalisation ----------------------
     bool finaliserVente(Vente& donneeVenteComplet);
-    bool genererFacture();
+    bool genererFacture(const Vente& donneeVenteComplet, const Client& client);
 
 
 
@@ -81,6 +90,7 @@ private:
 
     double m_pourcentageRemise;
     double m_montantRemiseManuel;
+    QString m_dossierFacture;
 
     QList<AffichageElementPanier> m_elementsPanier;
 

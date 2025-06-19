@@ -179,28 +179,6 @@ void GestionProduitDialog::on_bouton_enregistrer_clicked()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//RENOMMMER LES VARIABLES
-
-
-
-
-
-
 void GestionProduitDialog::on_bouton_ajouter_unite_clicked()
 {
     if (!m_controleurProduit) {
@@ -208,21 +186,21 @@ void GestionProduitDialog::on_bouton_ajouter_unite_clicked()
         return;
     }
 
-    GestionUniteVenteDialog unitDialog(this);
-    if (unitDialog.exec() == QDialog::Accepted) {
-        UniteVenteProduit newUnit = unitDialog.getDonneeUniteVente();
+    GestionUniteVenteDialog uniteDialog(this);
+    if (uniteDialog.exec() == QDialog::Accepted) {
+        UniteVenteProduit nouvelUnite = uniteDialog.getDonneeUniteVente();
 
         if (m_id_produit == 0) { //Unité pour un nouveau produit, sera enregistré avec le produit
-            newUnit.id_unite = -(m_unitesVenteCourant.size() + 1); //id temporaire
+            nouvelUnite.id_unite = -(m_unitesVenteCourant.size() + 1); //id temporaire
 
-            newUnit.id_produit = 0;
-            m_unitesVenteCourant.append(newUnit);
+            nouvelUnite.id_produit = 0;
+            m_unitesVenteCourant.append(nouvelUnite);
             remplirTableUnitesVente();
             QMessageBox::information(this, "Unité ajouté", "Unité de vente pour le produit est enregistré.");
         } else { // Unité pour un produit existant
-            newUnit.id_produit = m_id_produit;
-            if (m_controleurProduit->ajouterUniteVenteProduit(newUnit)) {
-                m_unitesVenteCourant.append(newUnit);
+            nouvelUnite.id_produit = m_id_produit;
+            if (m_controleurProduit->ajouterUniteVenteProduit(nouvelUnite)) {
+                m_unitesVenteCourant.append(nouvelUnite);
                 remplirTableUnitesVente();
                 QMessageBox::information(this, "Unité ajouté", "Unité de vente enregistré avec succès.");
             } else {
@@ -241,50 +219,50 @@ void GestionProduitDialog::on_bouton_modifier_unite_clicked()
         return;
     }
 
-    QModelIndexList selectedIndexes = ui->table_view_unite_vente->selectionModel()->selectedRows();
-    if (selectedIndexes.isEmpty()) {
+    QModelIndexList indexSelectionnee = ui->table_view_unite_vente->selectionModel()->selectedRows();
+    if (indexSelectionnee.isEmpty()) {
         QMessageBox::information(this, "Modifier unité", "Veuillez selectionner un unité à modifer.");
         return;
     }
-    int selectedRow = selectedIndexes.first().row();
-    int unitIdInTable = m_unitesVenteTableModel->item(selectedRow, 0)->data(Qt::UserRole + 1).toInt();
+    int ligneSelectionnee = indexSelectionnee.first().row();
+    int id_unite = m_unitesVenteTableModel->item(ligneSelectionnee, 0)->data(Qt::UserRole + 1).toInt();
 
-    int unitIndexInList = -1;
+    int indexUniteDansListe = -1;
     for(int i=0; i < m_unitesVenteCourant.size(); i++) {
-        if(m_unitesVenteCourant[i].id_unite == unitIdInTable) {
-            unitIndexInList = i;
+        if(m_unitesVenteCourant[i].id_unite == id_unite) {
+            indexUniteDansListe = i;
             break;
         }
     }
 
-    if (unitIndexInList == -1) {
+    if (indexUniteDansListe == -1) {
         QMessageBox::critical(this, "Erreur", "Unité selectionné introuvable dans la liste");
         return;
     }
 
-    UniteVenteProduit& unitToEditRef = m_unitesVenteCourant[unitIndexInList];
+    UniteVenteProduit& refUniteAModifier = m_unitesVenteCourant[indexUniteDansListe];
 
-    GestionUniteVenteDialog unitDialog(this);
-    unitDialog.setDonneeUniteVente(unitToEditRef);
+    GestionUniteVenteDialog uniteDialog(this);
+    uniteDialog.setDonneeUniteVente(refUniteAModifier);
 
-    if (unitDialog.exec() == QDialog::Accepted) {
-        UniteVenteProduit updatedUnitDataFromDialog = unitDialog.getDonneeUniteVente();
+    if (uniteDialog.exec() == QDialog::Accepted) {
+        UniteVenteProduit nouveauDonneeUnite = uniteDialog.getDonneeUniteVente();
 
         if (m_id_produit == 0) {
 
-            unitToEditRef.nom_unite = updatedUnitDataFromDialog.nom_unite;
-            unitToEditRef.facteur_de_conversion_vers_base = updatedUnitDataFromDialog.facteur_de_conversion_vers_base;
-            unitToEditRef.prix_par_unite = updatedUnitDataFromDialog.prix_par_unite;
+            refUniteAModifier.nom_unite = nouveauDonneeUnite.nom_unite;
+            refUniteAModifier.facteur_de_conversion_vers_base = nouveauDonneeUnite.facteur_de_conversion_vers_base;
+            refUniteAModifier.prix_par_unite = nouveauDonneeUnite.prix_par_unite;
             remplirTableUnitesVente();
             QMessageBox::information(this, "Unité modifié", "Modification unité de vente pris en compte");
         } else {
-            updatedUnitDataFromDialog.id_unite = unitToEditRef.id_unite;
-            updatedUnitDataFromDialog.id_produit = m_id_produit;
-            if (m_controleurProduit->modifierUniteVenteProduit(updatedUnitDataFromDialog)) {
-                // Update the unit in m_currentSellingUnits to reflect changes
-                unitToEditRef.nom_unite = updatedUnitDataFromDialog.nom_unite;
-                unitToEditRef.facteur_de_conversion_vers_base = updatedUnitDataFromDialog.facteur_de_conversion_vers_base;
-                unitToEditRef.prix_par_unite = updatedUnitDataFromDialog.prix_par_unite;
+            nouveauDonneeUnite.id_unite = refUniteAModifier.id_unite;
+            nouveauDonneeUnite.id_produit = m_id_produit;
+            if (m_controleurProduit->modifierUniteVenteProduit(nouveauDonneeUnite)) {
+
+                refUniteAModifier.nom_unite = nouveauDonneeUnite.nom_unite;
+                refUniteAModifier.facteur_de_conversion_vers_base = nouveauDonneeUnite.facteur_de_conversion_vers_base;
+                refUniteAModifier.prix_par_unite = nouveauDonneeUnite.prix_par_unite;
                 remplirTableUnitesVente();
                 QMessageBox::information(this, "Unité modifié", "Modification unité de vente pris en compte.");
             } else {
@@ -304,13 +282,13 @@ void GestionProduitDialog::on_bouton_supprimer_unite_clicked()
         return;
     }
 
-    QModelIndexList selectedIndexes = ui->table_view_unite_vente->selectionModel()->selectedRows();
-    if (selectedIndexes.isEmpty()) {
+    QModelIndexList indexSelectionnee = ui->table_view_unite_vente->selectionModel()->selectedRows();
+    if (indexSelectionnee.isEmpty()) {
         QMessageBox::information(this, "Supprimer unité", "Veuillez selectionner un unité à supprimer.");
         return;
     }
-    int selectedRow = selectedIndexes.first().row();
-    int unitIdInTable = m_unitesVenteTableModel->item(selectedRow, 0)->data(Qt::UserRole + 1).toInt();
+    int ligneSelectionnee = indexSelectionnee.first().row();
+    int id_unite = m_unitesVenteTableModel->item(ligneSelectionnee, 0)->data(Qt::UserRole + 1).toInt();
 
     if (QMessageBox::question(this, "Confirmer suppression", "Vous voulez vraimenet supprimer l'unité?",
                               QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
@@ -318,27 +296,27 @@ void GestionProduitDialog::on_bouton_supprimer_unite_clicked()
     }
 
 
-    bool foundAndRemoved = false;
+    bool trouveEtSupprime = false;
     for (int i = 0; i < m_unitesVenteCourant.size(); i++) {
-        if (m_unitesVenteCourant[i].id_unite == unitIdInTable) {
+        if (m_unitesVenteCourant[i].id_unite == id_unite) {
             if (m_id_produit != 0) {
-                if (unitIdInTable > 0) {
-                    if (!m_controleurProduit->supprimerUniteVenteProduit(unitIdInTable)) {
+                if (id_unite > 0) {
+                    if (!m_controleurProduit->supprimerUniteVenteProduit(id_unite)) {
                         QMessageBox::warning(this, "Erreur de suppression unité", "Echec de suppression de l'unité dans la base de données.");
                         return;
                     }
                 }
             }
             m_unitesVenteCourant.removeAt(i);
-            foundAndRemoved = true;
+            trouveEtSupprime = true;
             remplirTableUnitesVente();
             QMessageBox::information(this, "Unité supprimé", "Unité de vente supprimé avec succès.");
             break;
         }
     }
 
-    if(!foundAndRemoved && unitIdInTable > 0){
-         QMessageBox::critical(this, "Erreur", "Unité (ID: " + QString::number(unitIdInTable) + ") introuvable dans la liste local pour la suppression.");
+    if(!trouveEtSupprime && id_unite > 0){
+         QMessageBox::critical(this, "Erreur", "Unité (ID: " + QString::number(id_unite) + ") introuvable dans la liste local pour la suppression.");
     }
 }
 

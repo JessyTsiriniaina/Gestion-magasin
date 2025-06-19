@@ -10,7 +10,8 @@ ControleurVente::ControleurVente(QObject *parent, ModeleClient* modeleClient, Mo
     m_modeleProduit(modeleProduit),
     m_modeleVente(modeleVente),
     m_pourcentageRemise(0.0),
-    m_montantRemiseManuel(0.0)
+    m_montantRemiseManuel(0.0),
+    m_dossierFacture("D:/facture")
 {
     if(!m_modeleClient || !m_modeleProduit || !m_modeleVente) {
         qCritical() << "Le controleur vente manque de un ou plusieurs modele, la fonctionnalité est incomplet";
@@ -39,12 +40,6 @@ Client ControleurVente::getClientById(int id_client)
 void ControleurVente::setClientCourant(const Client& client)
 {
     m_clientCourant = client;
-}
-
-void ControleurVente::viderClient()
-{
-    m_clientCourant = Client();
-    m_clientCourant.id_client = -1;
 }
 
 
@@ -305,16 +300,136 @@ bool ControleurVente::finaliserVente(Vente& donneeVenteComplet)
 
     if (m_modeleVente->enregistrerVente(enregistrementVente, composantsVente)) {
         donneeVenteComplet = enregistrementVente;
+        Client client= m_modeleClient->getClientById(donneeVenteComplet.id_client);
+
+        if(!genererFacture(donneeVenteComplet, client))
+            qDebug() << "Erreur lors de la generation de facture";
 
         return true;
+
+
     }
     return false;
 }
 
 
-bool ControleurVente::genererFacture()
+bool ControleurVente::genererFacture(const Vente& donneeVenteComplet, const Client& client)
 {
+    QTextDocument facture;
+    QTextCursor cursor(&facture);
 
+    QTextCharFormat normalFormat;
+    normalFormat.setFont(QFont("Outfit", 10));
+
+    QTextCharFormat boldFormat;
+    boldFormat.setFont(QFont("Outfit", 10, QFont::Bold));
+
+    QTextCharFormat titreFormat;
+    titreFormat.setFont(QFont("Outfit", 16, QFont::Bold));
+
+    cursor.movePosition(QTextCursor::Start);
+    cursor.insertBlock();
+
+    cursor.insertText("FACTURE\n", titreFormat);
+    cursor.insertBlock();
+    cursor.insertText("{Nom du magasin}\n", boldFormat);
+    cursor.insertText("{Adresse}\n", normalFormat);
+    cursor.insertText("{E-mail}\n", normalFormat);
+    cursor.insertText("{Telephone}\n\n", normalFormat);
+
+
+    cursor.insertText("Client :\n", boldFormat);
+    if(client.id_client < 1)
+        cursor.insertText(QString("Anonyme/temporaire\n\n"), normalFormat);
+    else {
+        cursor.insertText(QString(client.nom_client + "\n"), normalFormat);
+        cursor.insertText(QString("Téléphone: " + client.telephone_client + "\n\n"), normalFormat);
+    }
+
+    QString numeroFacture = QString::number(donneeVenteComplet.id_vente);
+    QString dateHeureFacture = donneeVenteComplet.date_heure_vente.toString("dd/MM/yyyy à hh:mm");
+    cursor.insertText(QString("Facture n° : " + numeroFacture + "\n"), normalFormat);
+    cursor.insertText(QString("Date et heure: %1\n\n").arg(dateHeureFacture), normalFormat);
+
+
+    QTextTableFormat tableFormat;
+    tableFormat.setBorder(1);
+    tableFormat.setCellPadding(5);
+    tableFormat.setAlignment(Qt::AlignCenter);
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+
+    QStringList headers;
+    headers << "Nom du produit" << "Unité" << "Prix unitaire" << "Quantité"  << "Subtotal";
+
+    QTextTable *table = cursor.insertTable(m_elementsPanier.count() + 1, headers.count(), tableFormat);
+
+
+    for (int col = 0; col < headers.size(); col++) {
+        QTextTableCell cellule = table->cellAt(0, col);
+        QTextCursor cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(headers[col], boldFormat);
+    }
+
+
+    int ligne = 1;
+    double total = 0;
+    foreach(const AffichageElementPanier& element, m_elementsPanier) {
+        int col = 0;
+
+        QTextTableCell cellule = table->cellAt(ligne, col++);
+        QTextCursor cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(element.nom_produit, normalFormat);
+
+        cellule = table->cellAt(ligne, col++);
+        cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(element.nom_unite , normalFormat);
+
+        cellule = table->cellAt(ligne, col++);
+        cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(QString(QString::number(element.prix_de_vente) + " Ar"), normalFormat);
+
+        cellule = table->cellAt(ligne, col++);
+        cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(QString::number(element.quantite_vendu), normalFormat);
+
+        cellule = table->cellAt(ligne, col++);
+        cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(QString(QString::number(element.subtotal_composant) + " Ar"), normalFormat);
+
+        ligne++;
+        total += element.subtotal_composant;
+    }
+
+    cursor.movePosition(QTextCursor::End);
+    cursor.insertBlock();
+
+
+    cursor.insertText(QString("\nTotal: " + QString::number(total) + " Ar\n"), normalFormat);
+    cursor.insertText(QString("Remise: " + QString::number(donneeVenteComplet.montant_remise) + " Ar\n"), normalFormat);
+    cursor.insertText(QString("Grand total: " + QString::number(donneeVenteComplet.montant_total) + " Ar\n"), boldFormat);
+
+
+    cursor.insertText(QString("\n\n\n Merci beaucoup! A bientôt!"), normalFormat);
+
+
+    // Générer le PDF
+    QPrinter printer(QPrinter::HighResolution);
+
+    QDir().mkpath(m_dossierFacture);
+    QString cheminFichier = m_dossierFacture + "/" + QString::number(donneeVenteComplet.id_vente) + ".pdf";
+
+    if (!cheminFichier.isEmpty()) {
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(cheminFichier);
+        facture.print(&printer);
+        qDebug() << "Facture générée :" << cheminFichier;
+
+        QDesktopServices::openUrl(QUrl::fromLocalFile(cheminFichier));
+
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -325,7 +440,6 @@ bool ControleurVente::genererFacture()
 void ControleurVente::reinitialiserVente()
 {
     m_elementsPanier.clear();
-    viderClient();
     m_pourcentageRemise = 0.0;
     m_montantRemiseManuel = 0.0;
 

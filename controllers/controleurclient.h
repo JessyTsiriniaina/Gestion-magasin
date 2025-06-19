@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QStandardItemModel>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+
 #include "models/modeleclient.h"
 
 
@@ -19,6 +22,9 @@ public:
     bool ajouterClient(Client& donneeClient);
     bool modifierClient(const Client& donneeClient);
     bool supprimerClient(int id_client);
+
+
+    bool isTelephoneValide(QString telephone);
 
 signals:
 

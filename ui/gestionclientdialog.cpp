@@ -75,6 +75,12 @@ void GestionClientDialog::on_bouton_enregistrer_clicked()
         return;
     }
 
+    if(!m_controleurClient->isTelephoneValide(telephone)){
+        QMessageBox::warning(this, "Numéro de telephone invalide", "Veuillez entrer un numéro de téléphone valide");
+        ui->input_telephone_client->setFocus();
+        return;
+    }
+
     Client donneeClient;
     donneeClient.nom_client = nom;
     donneeClient.telephone_client = telephone;
