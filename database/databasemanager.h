@@ -11,12 +11,13 @@ private:
     QString m_connectionName;
     QSqlDatabase m_db;
 
-public:
-    DatabaseManager(const QString& path, const QString& connectionName);
-    ~DatabaseManager();
-    //file:///D:/documents/work/c_cpp/cpp/Gestion_magasin/gestion_magasin.db
-    static QSqlDatabase database(const QString& path="gestion_magasin.db", const QString& connectionName="main_connection");
     bool openDatabase();
+
+public:
+    DatabaseManager(const QString& connectionName);
+    ~DatabaseManager();
+
+    static QSqlDatabase database(const QString& connectionName="main_connection");
 };
 
 

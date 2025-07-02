@@ -4,8 +4,9 @@
 #include <QDebug>
 #include <QVariant>
 
-ModeleVente::ModeleVente(QObject *parent) :
-    QObject(parent)
+ModeleVente::ModeleVente(QObject *parent, ModeleProduit* modeleProduit) :
+    QObject(parent),
+    m_modeleProduit(modeleProduit)
 {
     //constructeur
 }
@@ -36,7 +37,7 @@ UniteVenteProduit ModeleVente::getUniteVenteProduitById(int id_unite)
 bool ModeleVente::enregistrerVente(Vente& donneeVente, QList<ComposantVente>& composantsVente)
 {
     if (!m_modeleProduit) {
-        qWarning() << "ModeleProduit non initialisé, ne peut pas enregistrer une vente";
+        qWarning() << "ModeleVente::ModeleProduit non initialisé, ne peut pas enregistrer une vente";
         return false;
     }
     if (composantsVente.isEmpty()) {

@@ -52,11 +52,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->combo_box_liste_client->addItem("Client temporaire", QVariant(0));
 
 
-    QSqlDatabase db = DatabaseManager::database("gestion_magasin.db", "main_connection");
+    QSqlDatabase db = DatabaseManager::database();
     if (!db.isValid() || !db.isOpen()) {
          QMessageBox::critical(this, "Erreur base de données", "Echec lors de la connexion à la base de données");
          return;
     }
+    else qDebug() << db.databaseName();
 
 
 
@@ -76,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Initialisation des modeles
     m_modeleClient = new ModeleClient(this);
     m_modeleProduit = new ModeleProduit(this);
-    m_modeleVente = new ModeleVente(this);
+    m_modeleVente = new ModeleVente(this, m_modeleProduit);
     m_modeleRapport = new ModeleRapport(this);
 
 

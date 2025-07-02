@@ -11,11 +11,12 @@
 #include <QTextDocument>
 #include <QPrinter>
 #include <QDesktopServices>
-#include <QDir>
 #include <QFontDatabase>
 #include <QDebug>
 #include <QTextTable>
 #include <QDate>
+#include <QDir>
+#include <QStandardPaths>
 
 
 #include "models/client.h"
@@ -90,7 +91,6 @@ private:
 
     double m_pourcentageRemise;
     double m_montantRemiseManuel;
-    QString m_dossierFacture;
 
     QList<AffichageElementPanier> m_elementsPanier;
 

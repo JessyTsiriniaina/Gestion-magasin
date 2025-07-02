@@ -1,7 +1,9 @@
 #include "databasemanager.h"
 #include <QDebug>
 #include <QSqlError>
-#include <QSqlDatabase>
+#include <QStandardPaths>
+#include <QFile>
+#include <QDir>
 
 
 /*QSqlDatabase DatabaseManager::database(const QString& path, const QString& connectionName)
@@ -22,11 +24,19 @@
 
 }*/
 
-DatabaseManager::DatabaseManager(const QString& path, const QString& connectionName)
+DatabaseManager::DatabaseManager(const QString& connectionName)
     : m_connectionName(connectionName),
       m_db(QSqlDatabase::addDatabase("QSQLITE", connectionName))
 {
-    m_db.setDatabaseName(path);
+    QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    QDir().mkpath(dataLocation);
+    QString cheminBaseDeDonnee = QDir(dataLocation).filePath("gestion_magasin.db");
+    if(!QFile::exists(cheminBaseDeDonnee)) {
+        QFile::copy(":/db/db/gestion_magasin.db", cheminBaseDeDonnee);
+        QFile::setPermissions(cheminBaseDeDonnee, QFile::ReadOwner | QFile::WriteOwner);
+    }
+
+    m_db.setDatabaseName(cheminBaseDeDonnee);
 }
 
 DatabaseManager::~DatabaseManager()
@@ -37,10 +47,10 @@ DatabaseManager::~DatabaseManager()
     }
 }
 
-QSqlDatabase DatabaseManager::database(const QString& path, const QString& connectionName)
+QSqlDatabase DatabaseManager::database(const QString& connectionName)
 {
     if (!QSqlDatabase::contains(connectionName)) {
-        DatabaseManager* newInstance = new DatabaseManager(path, connectionName);
+        DatabaseManager* newInstance = new DatabaseManager(connectionName);
 
         if (!newInstance->openDatabase()) {
             qDebug() << "Echec lors de l'ouverture de la base de données:" << connectionName;

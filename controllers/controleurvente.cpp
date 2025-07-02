@@ -10,8 +10,7 @@ ControleurVente::ControleurVente(QObject *parent, ModeleClient* modeleClient, Mo
     m_modeleProduit(modeleProduit),
     m_modeleVente(modeleVente),
     m_pourcentageRemise(0.0),
-    m_montantRemiseManuel(0.0),
-    m_dossierFacture("D:/facture")
+    m_montantRemiseManuel(0.0)
 {
     if(!m_modeleClient || !m_modeleProduit || !m_modeleVente) {
         qCritical() << "Le controleur vente manque de un ou plusieurs modele, la fonctionnalité est incomplet";
@@ -155,7 +154,7 @@ bool ControleurVente::ajouterElementAuPanier(int id_produit, int id_unite, doubl
 
     m_elementsPanier.append(elementPanier);
     calculerEtEmettreTotals();
-    //emit panierAChange();
+
     return true;
 }
 
@@ -166,7 +165,7 @@ bool ControleurVente::supprimerElementDuPanier(int indexElementPanier)
     }
     m_elementsPanier.removeAt(indexElementPanier);
     calculerEtEmettreTotals();
-    //emit panierAChange();
+
     return true;
 }
 
@@ -415,16 +414,18 @@ bool ControleurVente::genererFacture(const Vente& donneeVenteComplet, const Clie
     // Générer le PDF
     QPrinter printer(QPrinter::HighResolution);
 
-    QDir().mkpath(m_dossierFacture);
-    QString cheminFichier = m_dossierFacture + "/" + QString::number(donneeVenteComplet.id_vente) + ".pdf";
+    QString documents = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    QString dossierFacture = QDir(documents).filePath("Gestion-magasin/Factures");
+    QDir().mkpath(dossierFacture);
+    QString cheminFacture = dossierFacture + "/" + QString::number(donneeVenteComplet.id_vente) + ".pdf";
 
-    if (!cheminFichier.isEmpty()) {
+    if (!cheminFacture.isEmpty()) {
         printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(cheminFichier);
+        printer.setOutputFileName(cheminFacture);
         facture.print(&printer);
-        qDebug() << "Facture générée :" << cheminFichier;
+        qDebug() << "Facture générée :" << cheminFacture;
 
-        QDesktopServices::openUrl(QUrl::fromLocalFile(cheminFichier));
+        QDesktopServices::openUrl(QUrl::fromLocalFile(cheminFacture));
 
         return true;
     }

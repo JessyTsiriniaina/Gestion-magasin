@@ -16,7 +16,7 @@ class ModeleVente : public QObject
 {
     Q_OBJECT
 public:
-    explicit ModeleVente(QObject *parent = 0);
+    explicit ModeleVente(QObject *parent = 0, ModeleProduit* modeleProduit = 0);
 
     bool enregistrerVente(Vente& donneeVente, QList<ComposantVente>& composantsVente);
     Vente getVenteById(int id_vente); //sans ses composants
