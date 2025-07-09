@@ -97,8 +97,8 @@ QMap<QString, double> ModeleRapport::getVenteMensuel(int annee)
     }
     QSqlQuery query(DatabaseManager::database());
 
-    // Using strftime which is SQLite specific.
-    query.prepare("SELECT strftime('%Y-%m', date_heure_vente) AS mois_de_vente, SUM(montant_total) AS grand_total_mensuel " // SUM(montant_total) est la somme de (subtotal - discount)
+    //strftime permet d'extracter un information specifique date une date, specifique à SQlite.
+    query.prepare("SELECT strftime('%m-%Y', date_heure_vente) AS mois_de_vente, SUM(montant_total) AS grand_total_mensuel " // SUM(montant_total) est la somme de (subtotal - discount)
                   "FROM Ventes "
                   "WHERE strftime('%Y', date_heure_vente) = :annee "
                   "GROUP BY mois_de_vente ORDER BY mois_de_vente ASC");

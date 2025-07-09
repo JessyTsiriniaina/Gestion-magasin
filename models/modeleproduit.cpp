@@ -16,13 +16,10 @@ bool ModeleProduit::nomProduitExiste(const QString& nom, int idProduitCourant)
     QSqlQuery query(DatabaseManager::database());
     query.prepare("SELECT id_produit FROM Produits WHERE nom_produit = :nom AND id_produit != :idProduitCourant");
     query.bindValue(":nom", nom);
-    query.bindValue(":idProduitCourant", idProduitCourant == -1 ? QVariant(QVariant::Int) : idProduitCourant);
+    query.bindValue(":idProduitCourant", idProduitCourant);
 
-    if (query.exec() && query.next()) {
-        return true;
-    }
-    if (query.lastError().isValid()) {
-        qWarning() << "Echec: nom Produit existant:" << query.lastError().text();
+    if (!query.exec() && query.next()) {
+       return true;
     }
     return false;
 }

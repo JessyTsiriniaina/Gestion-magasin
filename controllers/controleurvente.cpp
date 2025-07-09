@@ -350,10 +350,13 @@ bool ControleurVente::genererFacture(const Vente& donneeVenteComplet, const Clie
     cursor.insertText(QString("Facture n° : " + numeroFacture + "\n"), normalFormat);
     cursor.insertText(QString("Date et heure: %1\n\n").arg(dateHeureFacture), normalFormat);
 
+    cursor.insertBlock();
+
 
     QTextTableFormat tableFormat;
     tableFormat.setBorder(1);
     tableFormat.setCellPadding(5);
+    tableFormat.setCellSpacing(0);
     tableFormat.setAlignment(Qt::AlignCenter);
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
 

@@ -78,7 +78,7 @@ border: 1px solid rgb(85, 170, 255);
         </font>
        </property>
        <property name="toolTip">
-        <string>How many base units are in this selling unit? (e.g., if base is Kg and this unit is 'Gram', factor is 0.001. If this unit is '5 Kg Bag', factor is 5)</string>
+        <string>Combien d'unité de base pour avoir 1 de cet unité. Ex: 0.25kg = 1kapoaka</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QDoubleSpinBox {

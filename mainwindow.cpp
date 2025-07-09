@@ -267,14 +267,15 @@ void MainWindow::gererChangementTotals(const QVariantMap& totals)
 void MainWindow::configurerRapportTab()
 {
     m_rapportTableModel = new QStandardItemModel(this);
+    ui->stacked_widget_parametre_rapport->setCurrentIndex(0);
     ui->table_view_resultat_rapport->setModel(m_rapportTableModel);
-    ui->combo_box_mois->addItem("Tous les ans", QVariant(0));
+    ui->combo_box_mois->addItem("Tous les mois", QVariant(0));
     ui->combo_box_selectionner_client->addItem("Client temporaire", QVariant(0));
     for (int i = 1; i <= 12; ++i) {
         ui->combo_box_mois->addItem(QLocale(QLocale(QLocale::French, QLocale::Madagascar)).monthName(i), i);
     }
 
-    // Set default dates
+    // Date par défaut
     QDate dateCourant = QDate::currentDate();
     QDate premierJourDuMoisPrecedent = dateCourant.addMonths(-1);
     premierJourDuMoisPrecedent.setDate(premierJourDuMoisPrecedent.year(), premierJourDuMoisPrecedent.month(), 1);
@@ -311,6 +312,8 @@ void MainWindow::chargerTableClient()
         return;
     }
     m_controleurClient->chargerClientsDansTableModel(m_clientTableModel, ui->input_rechercher_client_2->text());
+    ui->tableView_clients->resizeColumnsToContents();
+
 }
 
 int MainWindow::getIdClientSelectionneDansTableClient()
@@ -340,6 +343,8 @@ void MainWindow::chargerTableProduit()
         return;
     }
     m_controleurProduit->chargerProduitsDansTableModel(m_produitTableModel, ui->input_rechercher_produit->text());
+    ui->tableView_produits->resizeColumnsToContents();
+
 }
 
 int MainWindow::getIdProduitSelectionneDansTableProduit()

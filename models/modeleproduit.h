@@ -35,6 +35,7 @@ public:
     bool reapprovisionnerStockProduit(int id_produit, double nouveauQuantiteStockEnUniteDeBase);
 
     QList<Produit> rechercherProduit(const QString &motCle);
+    bool  nomProduitExiste(const QString& nom, int idProduitCourant = -1);
 
 
 signals:
@@ -42,7 +43,6 @@ signals:
 public slots:
 
 private:
-    bool  nomProduitExiste(const QString& nom, int idProduitCourant = -1);
 
 };
 

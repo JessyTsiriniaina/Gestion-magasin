@@ -39,7 +39,7 @@ private:
     QList<UniteVenteProduit> m_unitesVenteCourant; // Liste des unités pour le produit dans ce dialog
     QStandardItemModel* m_unitesVenteTableModel;
 
-    void chargerDonneeClient();
+    void chargerDonneeProduit();
     void remplirTableUnitesVente();
 };
 

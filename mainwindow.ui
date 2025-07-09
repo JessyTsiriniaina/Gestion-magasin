@@ -27,7 +27,8 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: &quot;Outfit&quot;;
-background-color:rgb(244, 247, 255);</string>
+background-color:rgb(244, 247, 255);
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
@@ -69,7 +70,7 @@ QTabBar::tab {
 	font: 13pt;
 }
 
-QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-color:  rgba(255, 255, 255, 180)}</string>
+QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-color:  rgb(244, 247, 255)}</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
@@ -78,7 +79,7 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -379,9 +380,6 @@ QComboBox::down-arrow:on {
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="toolTip">
-              <string>Matching products will appear here</string>
              </property>
              <property name="styleSheet">
               <string notr="true">QComboBox {
@@ -757,7 +755,7 @@ QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
               </font>
              </property>
              <property name="toolTip">
-              <string>Calculated from percentage, or can be entered directly if percentage is zero.</string>
+              <string>Calculé depuis le pourcentage, ou entrée directement si le pourcentage est 0</string>
              </property>
              <property name="styleSheet">
               <string notr="true">QLineEdit {
@@ -2313,11 +2311,6 @@ QPushButton:hover {
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QStatusBar" name="statusBar">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

@@ -128,13 +128,13 @@ bool ControleurRapport::genererHistoriqueDeVenteMensuel(int annee, int mois, QSt
     tableModel->clear();
 
     QStringList headers;
-    headers << "Année-Mois" << "Total Vente";
+    headers << "Mois-Année" << "Total Vente";
     tableModel->setHorizontalHeaderLabels(headers);
 
     if (mois > 0 && mois <= 12) {
 
         QMap<QString, double> rapportMensuel = m_modeleRapport->getVenteMensuel(annee);
-        QString moisCible = QString("%1-%2").arg(annee).arg(mois, 2, 10, QChar('0'));
+        QString moisCible = QString("%1-%2").arg(mois, 2, 10, QChar('0')).arg(annee);
         if (rapportMensuel.contains(moisCible)) {
             remplirVenteMensuelLigne(tableModel, moisCible, rapportMensuel.value(moisCible));
         }

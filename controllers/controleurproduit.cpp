@@ -90,6 +90,10 @@ bool ControleurProduit::supprimerProduit(int id_produit)
     return m_modeleProduit->supprimerProduit(id_produit);
 }
 
+bool ControleurProduit::nomProduitExiste(QString nom, int id_produit) {
+    return m_modeleProduit->nomProduitExiste(nom, id_produit);
+}
+
 
 
 

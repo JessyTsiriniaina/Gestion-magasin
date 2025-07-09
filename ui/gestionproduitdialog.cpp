@@ -37,7 +37,7 @@ GestionProduitDialog::GestionProduitDialog(QWidget *parent, ControleurProduit* c
 
     if (m_id_produit != 0) { // Produit existant
         setWindowTitle("Modifier produit");
-        chargerDonneeClient();
+        chargerDonneeProduit();
         ui->spin_box_stock_initial->setEnabled(false);
         ui->spin_box_stock_initial->setToolTip("Stock pour un produit existant est geré par \"Reapprovisionner stock\".");
     } else { // nouveau produit
@@ -66,7 +66,7 @@ GestionProduitDialog::~GestionProduitDialog()
     delete ui;
 }
 
-void GestionProduitDialog::chargerDonneeClient()
+void GestionProduitDialog::chargerDonneeProduit()
 {
     if (!m_controleurProduit || m_id_produit == 0) return;
 
@@ -151,6 +151,11 @@ void GestionProduitDialog::on_bouton_enregistrer_clicked()
     if (m_id_produit == 0 && m_unitesVenteCourant.isEmpty()) {
          QMessageBox::warning(this, "Erreur", "Veuillez définir au moins un unité de vente pour le nouveau produit.");
          return;
+    }
+
+    if(m_controleurProduit->nomProduitExiste(ui->input_nom_produit->text().trimmed(), m_id_produit)) {
+        QMessageBox::warning(this, "Erreur", "Nom de produit déjà existant");
+        return;
     }
 
 

@@ -124,9 +124,6 @@ border: 1px solid rgb(85, 170, 255);
           <pointsize>10</pointsize>
          </font>
         </property>
-        <property name="toolTip">
-         <string>Only applicable when adding a new product. For existing products, use 'Add Stock' feature.</string>
-        </property>
         <property name="styleSheet">
          <string notr="true">QDoubleSpinBox {
     border: 1px solid #CCCCCC;

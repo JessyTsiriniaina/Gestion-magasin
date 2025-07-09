@@ -30,6 +30,7 @@ public:
 
     bool reapprovisionnerStockProduit(int id_produit, double nouveauQuantiteStockEnUniteDeBase);
     double getStockProduitEnUniteDeBase(int id_produit);
+    bool nomProduitExiste(QString nom, int id_produit);
 
 signals:
 
