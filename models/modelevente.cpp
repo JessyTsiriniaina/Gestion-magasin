@@ -101,13 +101,14 @@ bool ModeleVente::enregistrerVente(Vente& donneeVente, QList<ComposantVente>& co
 
 
         QSqlQuery composantQuery(db);
-        composantQuery.prepare("INSERT INTO ComposantsVente (id_vente, id_produit, id_unite_vente, quantite_vendu, prix_de_vente, subtotal_composant) "
-                          "VALUES (:id_vente, :id_produit, :id_unite_vente, :quantite_vendu, :prix_de_vente, :subtotal_composant)");
+        composantQuery.prepare("INSERT INTO ComposantsVente (id_vente, id_produit, id_unite_vente, quantite_vendu, prix_de_vente, montant_remise, subtotal_composant) "
+                          "VALUES (:id_vente, :id_produit, :id_unite_vente, :quantite_vendu, :prix_de_vente, :montant_remise, :subtotal_composant)");
         composantQuery.bindValue(":id_vente", composant.id_vente);
         composantQuery.bindValue(":id_produit", composant.id_produit);
         composantQuery.bindValue(":id_unite_vente", composant.id_unite_vente);
         composantQuery.bindValue(":quantite_vendu", composant.quantite_vendu);
         composantQuery.bindValue(":prix_de_vente", composant.prix_de_vente);
+        composantQuery.bindValue(":montant_remise", composant.remise);
         composantQuery.bindValue(":subtotal_composant", composant.subtotal_composant);
 
         if (!composantQuery.exec()) {
@@ -237,7 +238,7 @@ QList<Vente> ModeleVente::getVenteParPlageDeDate(const QDateTime &dateDebut, con
             ventes.append(vente);
         }
     } else {
-        qWarning() << "Echec de recuperation de vente par plage d'adresse: " << query.lastError().text();
+        qWarning() << "Echec de recuperation de vente par plage de date: " << query.lastError().text();
     }
     return ventes;
 }
