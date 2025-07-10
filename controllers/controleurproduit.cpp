@@ -37,7 +37,7 @@ void ControleurProduit::remplirLigneProduit(QStandardItemModel *tableModel, cons
     remiseItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
 
-    ligneItems << idItem << nomItem << quantiteStockItem << uniteBaseItem  << remiseItem;
+    ligneItems << idItem << nomItem << uniteBaseItem  << remiseItem << quantiteStockItem ;
     tableModel->appendRow(ligneItems);
 }
 
@@ -49,7 +49,7 @@ bool ControleurProduit::chargerProduitsDansTableModel(QStandardItemModel* tableM
 
     tableModel->clear();
     QStringList headers;
-    headers << "ID" << "Nom" << "Quantité en stock (en unité de base)" << "Unité de base" << "Remise";
+    headers << "ID" << "Nom" << "Unité de base" << "Remise"  << "Quantité en stock (en unité de base)";
     tableModel->setHorizontalHeaderLabels(headers);
 
 
