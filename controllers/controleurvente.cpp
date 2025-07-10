@@ -151,6 +151,9 @@ bool ControleurVente::ajouterElementAuPanier(int id_produit, int id_unite, doubl
 
     elementPanier.nom_produit = produit.nom_produit;
     elementPanier.nom_unite = unite.nom_unite;
+    elementPanier.remise = elementPanier.subtotal_composant * produit.remise_pourcentage/100;
+
+    elementPanier.subtotal_composant -= elementPanier.remise;
 
     m_elementsPanier.append(elementPanier);
     calculerEtEmettreTotals();
@@ -294,6 +297,7 @@ bool ControleurVente::finaliserVente(Vente& donneeVenteComplet)
         composant.quantite_vendu = elementPanier.quantite_vendu;
         composant.prix_de_vente = elementPanier.prix_de_vente;
         composant.subtotal_composant = elementPanier.subtotal_composant;
+        composant.remise = elementPanier.remise;
         composantsVente.append(composant);
     }
 
@@ -351,17 +355,17 @@ bool ControleurVente::genererFacture(const Vente& donneeVenteComplet, const Clie
     cursor.insertText(QString("Date et heure: %1\n\n").arg(dateHeureFacture), normalFormat);
 
     cursor.insertBlock();
-
+    cursor.insertText("Detail(s) sur les article(s) acheté(s) :\n", boldFormat);
 
     QTextTableFormat tableFormat;
     tableFormat.setBorder(1);
-    tableFormat.setCellPadding(5);
     tableFormat.setCellSpacing(0);
+    tableFormat.setCellPadding(5);
     tableFormat.setAlignment(Qt::AlignCenter);
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
 
     QStringList headers;
-    headers << "Nom du produit" << "Unité" << "Prix unitaire" << "Quantité"  << "Subtotal";
+    headers << "Nom du produit" << "Unité" << "Prix unitaire" << "Quantité" << "Remise" << "Subtotal";
 
     QTextTable *table = cursor.insertTable(m_elementsPanier.count() + 1, headers.count(), tableFormat);
 
@@ -396,6 +400,10 @@ bool ControleurVente::genererFacture(const Vente& donneeVenteComplet, const Clie
 
         cellule = table->cellAt(ligne, col++);
         cellCursor = cellule.firstCursorPosition();
+        cellCursor.insertText(QString(QString::number(element.remise) + " Ar"), normalFormat);
+
+        cellule = table->cellAt(ligne, col++);
+        cellCursor = cellule.firstCursorPosition();
         cellCursor.insertText(QString(QString::number(element.subtotal_composant) + " Ar"), normalFormat);
 
         ligne++;
@@ -407,7 +415,7 @@ bool ControleurVente::genererFacture(const Vente& donneeVenteComplet, const Clie
 
 
     cursor.insertText(QString("\nTotal: " + QString::number(total) + " Ar\n"), normalFormat);
-    cursor.insertText(QString("Remise: " + QString::number(donneeVenteComplet.montant_remise) + " Ar\n"), normalFormat);
+    cursor.insertText(QString("Remise global: " + QString::number(donneeVenteComplet.montant_remise) + " Ar\n"), normalFormat);
     cursor.insertText(QString("Grand total: " + QString::number(donneeVenteComplet.montant_total) + " Ar\n"), boldFormat);
 
 

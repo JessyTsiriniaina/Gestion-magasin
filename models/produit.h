@@ -8,8 +8,9 @@ struct Produit {
     QString nom_produit;
     QString unite_base;
     double quantite_stock_en_unite_base;
+    double remise_pourcentage;
 
-    Produit() : id_produit(-1), quantite_stock_en_unite_base(0.0) {}
+    Produit() : id_produit(-1), quantite_stock_en_unite_base(0.0), remise_pourcentage(0.0) {}
 };
 
 

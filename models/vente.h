@@ -23,6 +23,7 @@ struct ComposantVente {
     int id_unite_vente;
     double quantite_vendu;
     double prix_de_vente;
+    double remise;
     double subtotal_composant;
 
     ComposantVente(): id_composant_vente(-1),
@@ -31,6 +32,7 @@ struct ComposantVente {
                       id_unite_vente(-1),
                       quantite_vendu(0.0),
                       prix_de_vente(0.0),
+                      remise(0.0),
                       subtotal_composant(0.0)
     {}
 };

@@ -75,6 +75,7 @@ void GestionProduitDialog::chargerDonneeProduit()
         QMessageBox::critical(this, "Erreur de chargement", "Ne peut pas charger les données du produit.");
         ui->input_nom_produit->setEnabled(false);
         ui->input_unite_base->setEnabled(false);
+        ui->spin_box_remise_pourcentage->setEnabled(false);
         ui->groupBox_unite_vente->setEnabled(false);
         ui->bouton_enregistrer->setEnabled(false);
         return;
@@ -82,7 +83,7 @@ void GestionProduitDialog::chargerDonneeProduit()
 
     ui->input_nom_produit->setText(m_produitCourant.nom_produit);
     ui->input_unite_base->setText(m_produitCourant.unite_base);
-
+    ui->spin_box_remise_pourcentage->setValue(m_produitCourant.remise_pourcentage);
 
     m_unitesVenteCourant = m_controleurProduit->getUniteVenteProduitPourProduit(m_id_produit);
 }
@@ -102,9 +103,11 @@ void GestionProduitDialog::remplirTableUnitesVente()
 
     foreach (const UniteVenteProduit& unite, m_unitesVenteCourant) {
         QList<QStandardItem*> ligneItems;
+
         QStandardItem* idItem = new QStandardItem(QString::number(unite.id_unite));
         idItem->setData(unite.id_unite, Qt::UserRole + 1);
         idItem->setFlags(idItem->flags() & ~Qt::ItemIsEditable);
+        idItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
         QStandardItem* nomItem = new QStandardItem(unite.nom_unite);
         nomItem->setFlags(nomItem->flags() & ~Qt::ItemIsEditable);
@@ -161,6 +164,7 @@ void GestionProduitDialog::on_bouton_enregistrer_clicked()
 
     m_produitCourant.nom_produit = ui->input_nom_produit->text().trimmed();
     m_produitCourant.unite_base = ui->input_unite_base->text().trimmed();
+    m_produitCourant.remise_pourcentage = ui->spin_box_remise_pourcentage->value();
 
     if (m_id_produit == 0) { // Nouveau produit
         m_produitCourant.quantite_stock_en_unite_base = ui->spin_box_stock_initial->value();

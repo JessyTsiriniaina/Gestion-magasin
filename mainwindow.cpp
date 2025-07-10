@@ -200,7 +200,7 @@ void MainWindow::raffraichirPanierTableView()
     if (!m_controleurVente) return;
     m_panierTableModel->clear();
     QStringList headers;
-    headers << "Nom produit" << "Unité" << "Prix Unitaire" << "Quantité" << "Subtotal";
+    headers << "Nom produit" << "Unité" << "Prix Unitaire" << "Quantité" << "Remise" << "Subtotal";
     m_panierTableModel->setHorizontalHeaderLabels(headers);
 
     const QList<AffichageElementPanier>& elementsPanier = m_controleurVente->getElementsPanier();
@@ -211,6 +211,7 @@ void MainWindow::raffraichirPanierTableView()
         elementsLigne.append(new QStandardItem(element.nom_unite));
         elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.prix_de_vente, "Ar")));
         elementsLigne.append(new QStandardItem(QString::number(element.quantite_vendu, 'f', 3)));
+        elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.remise, "Ar")));
         elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.subtotal_composant, "Ar")));
 
 
@@ -313,7 +314,6 @@ void MainWindow::chargerTableClient()
     }
     m_controleurClient->chargerClientsDansTableModel(m_clientTableModel, ui->input_rechercher_client_2->text());
     ui->tableView_clients->resizeColumnsToContents();
-
 }
 
 int MainWindow::getIdClientSelectionneDansTableClient()
@@ -344,7 +344,6 @@ void MainWindow::chargerTableProduit()
     }
     m_controleurProduit->chargerProduitsDansTableModel(m_produitTableModel, ui->input_rechercher_produit->text());
     ui->tableView_produits->resizeColumnsToContents();
-
 }
 
 int MainWindow::getIdProduitSelectionneDansTableProduit()

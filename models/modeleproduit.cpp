@@ -40,11 +40,12 @@ bool ModeleProduit::ajouterProduit(Produit &donneeProduit, QList<UniteVenteProdu
     }
 
     QSqlQuery query(db);
-    query.prepare("INSERT INTO Produits (nom_produit, unite_base, quantite_stock_en_unite_base) "
-                  "VALUES (:nom_produit, :unite_base, :quantite_stock_en_unite_base)");
+    query.prepare("INSERT INTO Produits (nom_produit, unite_base, quantite_stock_en_unite_base, remise_pourcentage) "
+                  "VALUES (:nom_produit, :unite_base, :quantite_stock_en_unite_base, :remise_pourcentage)");
     query.bindValue(":nom_produit", donneeProduit.nom_produit);
     query.bindValue(":unite_base", donneeProduit.unite_base);
     query.bindValue(":quantite_stock_en_unite_base", donneeProduit.quantite_stock_en_unite_base);
+    query.bindValue(":remise_pourcentage", donneeProduit.remise_pourcentage);
 
     if (!query.exec()) {
         qWarning() << "Echec d'ajout du produit:" << query.lastError().text();
@@ -101,12 +102,13 @@ bool ModeleProduit::modifierProduit(const Produit& donneeProduit)
 
     QSqlQuery query(DatabaseManager::database());
     query.prepare("UPDATE Produits SET nom_produit = :nom_produit, unite_base = :unite_base, "
-                  "quantite_stock_en_unite_base = :quantite_stock_en_unite_base "
+                  "quantite_stock_en_unite_base = :quantite_stock_en_unite_base, remise_pourcentage = :remise_pourcentage "
                   "WHERE id_produit = :id_produit");
     query.bindValue(":nom_produit", donneeProduit.nom_produit);
     query.bindValue(":unite_base", donneeProduit.unite_base);
     query.bindValue(":quantite_stock_en_unite_base", donneeProduit.quantite_stock_en_unite_base);
     query.bindValue(":id_produit", donneeProduit.id_produit);
+    query.bindValue(":remise_pourcentage", donneeProduit.remise_pourcentage);
 
     if (!query.exec()) {
         qWarning() << "Echec de modification:" << query.lastError().text();
@@ -163,7 +165,7 @@ Produit ModeleProduit::getProduitById(int id_produit)
     if (id_produit <= 0) return produit; // Invalide produit
 
     QSqlQuery query(DatabaseManager::database());
-    query.prepare("SELECT id_produit, nom_produit, unite_base, quantite_stock_en_unite_base "
+    query.prepare("SELECT id_produit, nom_produit, unite_base, quantite_stock_en_unite_base, remise_pourcentage "
                   "FROM Produits WHERE id_produit = :id_produit");
     query.bindValue(":id_produit", id_produit);
 
@@ -172,6 +174,7 @@ Produit ModeleProduit::getProduitById(int id_produit)
         produit.nom_produit = query.value("nom_produit").toString();
         produit.unite_base = query.value("unite_base").toString();
         produit.quantite_stock_en_unite_base = query.value("quantite_stock_en_unite_base").toDouble();
+        produit.remise_pourcentage = query.value("remise_pourcentage").toDouble();
     } else if (query.lastError().isValid()) {
         qWarning() << "Echec de recuperation du produit:" << query.lastError().text();
     }
@@ -192,6 +195,7 @@ QList<Produit> ModeleProduit::getAllProduit()
             produit.nom_produit = query.value("nom_produit").toString();
             produit.unite_base = query.value("unite_base").toString();
             produit.quantite_stock_en_unite_base = query.value("quantite_stock_en_unite_base").toDouble();
+            produit.remise_pourcentage = query.value("remise_pourcentage").toDouble();
             produits.append(produit);
         }
     } else {
@@ -337,7 +341,7 @@ QList<Produit> ModeleProduit::rechercherProduit(const QString &motCle)
     QSqlQuery query(DatabaseManager::database());
 
     QString motSimilaire = "%" + motCle + "%";
-    query.prepare("SELECT id_produit, nom_produit, unite_base, quantite_stock_en_unite_base FROM Produits "
+    query.prepare("SELECT id_produit, nom_produit, unite_base, quantite_stock_en_unite_base, remise_pourcentage FROM Produits "
                   "WHERE nom_produit LIKE :motCle ");
     query.bindValue(":motCle", motSimilaire);
 
@@ -348,6 +352,7 @@ QList<Produit> ModeleProduit::rechercherProduit(const QString &motCle)
             produit.nom_produit = query.value("nom_produit").toString();
             produit.unite_base = query.value("unite_base").toString();
             produit.quantite_stock_en_unite_base = query.value("quantite_stock_en_unite_base").toDouble();
+            produit.remise_pourcentage = query.value("remise_pourcentage").toDouble();
             produits.append(produit);
         }
     } else {

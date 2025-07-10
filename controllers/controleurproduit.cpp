@@ -15,22 +15,29 @@ ControleurProduit::ControleurProduit(QObject *parent, ModeleProduit* modeleProdu
 void ControleurProduit::remplirLigneProduit(QStandardItemModel *tableModel, const Produit &produit)
 {
     QList<QStandardItem*> ligneItems;
+
     QStandardItem* idItem = new QStandardItem(QString::number(produit.id_produit));
     idItem->setData(produit.id_produit, Qt::UserRole + 1); //stocker l'ID dans UserRole + 1
     idItem->setFlags(idItem->flags() & ~Qt::ItemIsEditable);//Faire en sorte que l'id n'est pas modifiable
+    idItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     QStandardItem* nomItem = new QStandardItem(produit.nom_produit);
     nomItem->setFlags(nomItem->flags() & ~Qt::ItemIsEditable);
-
-    QStandardItem* uniteBaseItem = new QStandardItem(produit.unite_base);
-    uniteBaseItem->setFlags(uniteBaseItem->flags() & ~Qt::ItemIsEditable);
+    nomItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     QStandardItem* quantiteStockItem = new QStandardItem(QString::number(produit.quantite_stock_en_unite_base, 'f', 3));
     quantiteStockItem->setFlags(quantiteStockItem->flags() & ~Qt::ItemIsEditable);
     quantiteStockItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
+    QStandardItem* uniteBaseItem = new QStandardItem(produit.unite_base);
+    uniteBaseItem->setFlags(uniteBaseItem->flags() & ~Qt::ItemIsEditable);
 
-    ligneItems << idItem << nomItem << uniteBaseItem << quantiteStockItem;
+    QStandardItem* remiseItem = new QStandardItem(QString(QString::number(produit.remise_pourcentage, 'f', 2) + "%"));
+    remiseItem->setFlags(remiseItem->flags() & ~Qt::ItemIsEditable);
+    remiseItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+
+    ligneItems << idItem << nomItem << quantiteStockItem << uniteBaseItem  << remiseItem;
     tableModel->appendRow(ligneItems);
 }
 
@@ -42,7 +49,7 @@ bool ControleurProduit::chargerProduitsDansTableModel(QStandardItemModel* tableM
 
     tableModel->clear();
     QStringList headers;
-    headers << "ID" << "Nom" << "Unité de base" << "Quantité en stock (en unité de base)";
+    headers << "ID" << "Nom" << "Quantité en stock (en unité de base)" << "Unité de base" << "Remise";
     tableModel->setHorizontalHeaderLabels(headers);
 
 

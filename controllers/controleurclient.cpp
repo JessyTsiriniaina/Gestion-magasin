@@ -17,12 +17,14 @@ void ControleurClient::remplirLigneClient(QStandardItemModel *tableModel, const 
     QStandardItem* idItem = new QStandardItem(QString::number(client.id_client));
     idItem->setData(client.id_client, Qt::UserRole + 1); //stocker l'ID dans UserRole + 1
     idItem->setFlags(idItem->flags() & ~Qt::ItemIsEditable); //Faire en sorte que l'id n'est pas modifiable
+    idItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     QStandardItem* nomItem = new QStandardItem(client.nom_client);
     nomItem->setFlags(nomItem->flags() & ~Qt::ItemIsEditable);
 
     QStandardItem* telephoneItem = new QStandardItem(client.telephone_client);
     telephoneItem->setFlags(telephoneItem->flags() & ~Qt::ItemIsEditable);
+    telephoneItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     ligneItems << idItem << nomItem << telephoneItem;
     tableModel->appendRow(ligneItems);
