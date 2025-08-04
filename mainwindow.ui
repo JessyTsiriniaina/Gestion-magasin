@@ -79,7 +79,7 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -133,9 +133,30 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-
           <property name="flat">
            <bool>false</bool>
           </property>
-          <layout class="QFormLayout" name="formLayout">
+          <layout class="QGridLayout" name="gridLayout">
            <item row="0" column="0">
             <widget class="QLabel" name="label_rechercher_client">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>Outfit</family>
@@ -150,7 +171,29 @@ QTabBar::tab:selected { color: rgba(120, 203, 160, 255); font: bold; background-
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_client_selectionne_tab_vente">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Outfit</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Clients:</string>
+             </property>
+             <property name="buddy">
+              <cstring>combo_box_liste_client</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
             <widget class="QLineEdit" name="input_rechercher_client">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -177,29 +220,7 @@ border: 1px solid rgb(85, 170, 255);
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_client_selectionne_tab_vente">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Clients:</string>
-             </property>
-             <property name="buddy">
-              <cstring>combo_box_liste_client</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
+           <item row="1" column="2">
             <widget class="QComboBox" name="combo_box_liste_client">
              <property name="font">
               <font>
@@ -240,6 +261,22 @@ QComboBox::down-arrow:on {
              </property>
             </widget>
            </item>
+           <item row="0" column="1">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Minimum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>24</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </widget>
         </item>
@@ -258,38 +295,6 @@ QComboBox::down-arrow:on {
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_ProductSelection">
-           <item row="3" column="2">
-            <widget class="QPushButton" name="bouton_ajouter_au_panier">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <italic>false</italic>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">
-QPushButton {
-background-color:  rgba(87, 182, 255, 50);
- padding: 5px 10px;
- border: 2px solid rgb(0, 85, 255);
-border-radius: 4px;
-color: rgb(0, 85, 255); 
-font: bold;
-}
-
-QPushButton:hover {
-	background-color:  rgba(87, 182, 255, 80) ; 
-}</string>
-             </property>
-             <property name="text">
-              <string>Ajouter au panier</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="2">
             <widget class="QComboBox" name="combo_box_unite_de_mesure">
              <property name="font">
@@ -370,44 +375,6 @@ QComboBox::down-arrow:on {
              </property>
             </widget>
            </item>
-           <item row="1" column="1" colspan="2">
-            <widget class="QComboBox" name="combo_box_produit_disponible">
-             <property name="font">
-              <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QComboBox {
-    padding: 2px 20px 2px 5px; 
-    border: 1px solid #CCCCCC;
-    border-radius: 3px;
-    background: white;
-}
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 20px;
-    border-left: 1px solid #CCCCCC;
-}
-QComboBox::down-arrow {
-    image: url(:/icons/icons/caret-down.svg);
-    width: 12px;
-    height: 12px;
-}
-QComboBox:hover::drop-down {
-    background: #E0E0E0;
-}
-QComboBox::down-arrow:on {
-    image: url(:/icons/icons/caret-up.svg); 
-}</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1">
             <widget class="QDoubleSpinBox" name="spin_box_quantite">
              <property name="font">
@@ -470,6 +437,44 @@ QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
              </property>
             </widget>
            </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QComboBox" name="combo_box_produit_disponible">
+             <property name="font">
+              <font>
+               <family>Outfit</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QComboBox {
+    padding: 2px 20px 2px 5px; 
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    background: white;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/icons/caret-down.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox:hover::drop-down {
+    background: #E0E0E0;
+}
+QComboBox::down-arrow:on {
+    image: url(:/icons/icons/caret-up.svg); 
+}</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="1" colspan="2">
             <widget class="QLineEdit" name="input_recherche_produit">
              <property name="font">
@@ -493,6 +498,55 @@ border: 1px solid rgb(85, 170, 255);
            </item>
           </layout>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bouton_ajouter_au_panier">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+QPushButton {
+background-color:  rgba(87, 182, 255, 50);
+ padding: 5px 10px;
+ border: 2px solid rgb(0, 85, 255);
+border-radius: 4px;
+color: rgb(0, 85, 255); 
+font: bold;
+}
+
+QPushButton:hover {
+	background-color:  rgba(87, 182, 255, 80) ; 
+}</string>
+            </property>
+            <property name="text">
+             <string>Ajouter au panier</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QGroupBox" name="group_box_panier">
@@ -624,8 +678,8 @@ QPushButton:hover {
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_Totals">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_subtotal">
+           <item row="3" column="4">
+            <widget class="QLabel" name="label_grand_total">
              <property name="font">
               <font>
                <family>Outfit</family>
@@ -633,25 +687,18 @@ QPushButton:hover {
               </font>
              </property>
              <property name="text">
-              <string>Subtotal:</string>
+              <string>Grand Total:</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_pourcentage_remise">
-             <property name="font">
-              <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Remise (%):</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
+           <item row="1" column="5">
             <widget class="QLineEdit" name="input_subtotal">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="font">
               <font>
                <family>Outfit</family>
@@ -677,8 +724,120 @@ border: 1px solid rgb(85, 170, 255);
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="1" column="4">
+            <widget class="QLabel" name="label_subtotal">
+             <property name="font">
+              <font>
+               <family>Outfit</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Subtotal:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="5">
+            <widget class="QLineEdit" name="input_grand_total">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLineEdit" name="input_montant_remise">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Outfit</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Calculé depuis le pourcentage, ou entrée directement si le pourcentage est 0</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+border: 1px solid rgb(180, 180, 180);
+border-radius: 4px;
+padding: 2px 5px;
+}
+
+QLineEdit:focus {
+border: 1px solid rgb(85, 170, 255);
+}</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_pourcentage_remise">
+             <property name="font">
+              <font>
+               <family>Outfit</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Remise (%):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_montant_remise">
+             <property name="font">
+              <font>
+               <family>Outfit</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Montant du remise:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
             <widget class="QDoubleSpinBox" name="spin_box_taux_remise">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="font">
               <font>
                <family>Outfit</family>
@@ -733,123 +892,60 @@ QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_montant_remise">
-             <property name="font">
-              <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
-              </font>
+           <item row="3" column="3">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
              </property>
-             <property name="text">
-              <string>Montant du remise:</string>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
              </property>
-            </widget>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>24</height>
+              </size>
+             </property>
+            </spacer>
            </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="input_montant_remise">
-             <property name="font">
-              <font>
-               <family>Outfit</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Calculé depuis le pourcentage, ou entrée directement si le pourcentage est 0</string>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QLineEdit {
-border: 1px solid rgb(180, 180, 180);
-border-radius: 4px;
-padding: 2px 5px;
-}
-
-QLineEdit:focus {
-border: 1px solid rgb(85, 170, 255);
-}</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="input_grand_total">
-             <property name="font">
-              <font>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QLineEdit {
-border: 1px solid rgb(180, 180, 180);
-border-radius: 4px;
-padding: 2px 5px;
-}
-
-QLineEdit:focus {
-border: 1px solid rgb(85, 170, 255);
-}</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_grand_total">
-             <property name="font">
-              <font>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Grand Total:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <layout class="QHBoxLayout" name="layout_boutons_action">
-             <item>
-              <spacer name="horizontalSpacer_Actions">
-               <property name="font">
-                <font>
-                 <family>Outfit</family>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="bouton_annuler">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <italic>false</italic>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="layout_boutons_action">
+          <item>
+           <spacer name="horizontalSpacer_Actions">
+            <property name="font">
+             <font>
+              <family>Outfit</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bouton_annuler">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
 
 QPushButton {
 background-color:  rgba(217, 217, 217, 100);
@@ -863,26 +959,26 @@ font: bold;
 QPushButton:hover {
 	background-color:    rgba(217, 217, 217, 150) ; 
 }</string>
-               </property>
-               <property name="text">
-                <string>Annuler</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="bouton_finaliser">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <italic>false</italic>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">
+            </property>
+            <property name="text">
+             <string>Annuler</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bouton_finaliser">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
 QPushButton {
 background-color:  rgba(87, 182, 255, 50);
  padding: 5px 10px;
@@ -895,19 +991,16 @@ font: bold;
 QPushButton:hover {
 	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
-               </property>
-               <property name="text">
-                <string>Finaliser la vente et générer une facture</string>
-               </property>
-               <property name="default">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
+            </property>
+            <property name="text">
+             <string>Finaliser la vente et générer une facture</string>
+            </property>
+            <property name="default">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -1063,7 +1156,7 @@ QComboBox::down-arrow:on {
            <item row="1" column="0" colspan="2">
             <widget class="QStackedWidget" name="stacked_widget_parametre_rapport">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_historique_vente">
               <layout class="QFormLayout" name="formLayout_SalesHistory">
@@ -1156,6 +1249,9 @@ QDateEdit::up-button:hover, QSpinBox::down-button:hover {
 QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
     background: #388E3C; 
 }</string>
+                 </property>
+                 <property name="displayFormat">
+                  <string>d/M/yyyy</string>
                  </property>
                 </widget>
                </item>
@@ -1435,6 +1531,12 @@ QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
     background: #388E3C; 
 }</string>
                  </property>
+                 <property name="locale">
+                  <locale language="French" country="France"/>
+                 </property>
+                 <property name="displayFormat">
+                  <string>d/M/yyyy</string>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -1499,6 +1601,9 @@ QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
     background: #388E3C; 
 }</string>
                  </property>
+                 <property name="displayFormat">
+                  <string>d/M/yyyy</string>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="0">
@@ -1558,6 +1663,9 @@ QDateEdit::up-button:hover, QSpinBox::down-button:hover {
 QDateEdit::up-button:pressed, QSpinBox::down-button:pressed {
     background: #388E3C; 
 }</string>
+                 </property>
+                 <property name="displayFormat">
+                  <string>d/M/yyyy</string>
                  </property>
                 </widget>
                </item>
@@ -1704,20 +1812,38 @@ QDoubleSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
              </widget>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="boutton_generer_rapport">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <italic>false</italic>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="boutton_generer_rapport">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
 QPushButton {
 background-color:  rgba(87, 182, 255, 50);
  padding: 5px 10px;
@@ -1730,14 +1856,13 @@ font: bold;
 QPushButton:hover {
 	background-color:  rgba(87, 182, 255, 80) ; 
 }</string>
-             </property>
-             <property name="text">
-              <string>Générer un rapport</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+            </property>
+            <property name="text">
+             <string>Générer un rapport</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QGroupBox" name="group_box_resultat_rapport">
@@ -2150,6 +2275,12 @@ QTableView {border: none;}</string>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>35</number>
+          </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>true</bool>
           </attribute>

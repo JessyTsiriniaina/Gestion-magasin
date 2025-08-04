@@ -5,38 +5,19 @@
 #include <QFile>
 #include <QDir>
 
-
-/*QSqlDatabase DatabaseManager::database(const QString& path, const QString& connectionName)
-{
-    QSqlDatabase db;
-    if(QSqlDatabase::contains(connectionName)) {
-        return QSqlDatabase::database(connectionName);
-    }
-    db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(path);
-
-    if(db.open()) {
-        qDebug() << "Connexion reussi";
-        return db;
-    }
-    qDebug() << "Connexion echoué";
-    return QSqlDatabase();
-
-}*/
-
 DatabaseManager::DatabaseManager(const QString& connectionName)
     : m_connectionName(connectionName),
       m_db(QSqlDatabase::addDatabase("QSQLITE", connectionName))
 {
     QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QDir().mkpath(dataLocation);
-    QString cheminBaseDeDonnee = QDir(dataLocation).filePath("gestion_magasin.db");
-    if(!QFile::exists(cheminBaseDeDonnee)) {
-        QFile::copy(":/db/db/gestion_magasin.db", cheminBaseDeDonnee);
-        QFile::setPermissions(cheminBaseDeDonnee, QFile::ReadOwner | QFile::WriteOwner);
+    QString dbPath = QDir(dataLocation).filePath("gestion_magasin.db");
+    if(!QFile::exists(dbPath)) {
+        QFile::copy(":/db/db/gestion_magasin.db", dbPath);
+        QFile::setPermissions(dbPath, QFile::ReadOwner | QFile::WriteOwner);
     }
 
-    m_db.setDatabaseName(cheminBaseDeDonnee);
+    m_db.setDatabaseName(dbPath);
 }
 
 DatabaseManager::~DatabaseManager()

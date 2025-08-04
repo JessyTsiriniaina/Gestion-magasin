@@ -26,21 +26,21 @@ void ControleurRapport::remplirLigneVente(QStandardItemModel *tableModel, const 
 {
     QList<QStandardItem*> elementsLigne;
     elementsLigne << (new QStandardItem(QString::number(vente.id_vente)));
-    elementsLigne << (new QStandardItem(vente.date_heure_vente.toString(Qt::DefaultLocaleShortDate)));
+    elementsLigne << (new QStandardItem(vente.date_heure_vente.toString("dd/MM/yyyy hh:mm")));
     elementsLigne << (new QStandardItem(getNomClient(vente.id_client)));
-
-    QStandardItem* montantTotalElement = new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(vente.montant_total, "Ar"));
-    montantTotalElement->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    elementsLigne << montantTotalElement;
-
-    QStandardItem* elementRemise = new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(vente.montant_remise, "Ar"));
-    elementRemise->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    elementsLigne << elementRemise;
 
     double subTotal = vente.montant_total + vente.montant_remise;
     QStandardItem* subTotalElement = new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(subTotal, "Ar"));
     subTotalElement->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
     elementsLigne << subTotalElement;
+
+    QStandardItem* elementRemise = new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(vente.montant_remise, "Ar"));
+    elementRemise->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    elementsLigne << elementRemise;
+
+    QStandardItem* montantTotalElement = new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(vente.montant_total, "Ar"));
+    montantTotalElement->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    elementsLigne << montantTotalElement;
 
     tableModel->appendRow(elementsLigne);
 }
@@ -108,7 +108,7 @@ bool ControleurRapport::genererHistoriqueDeVente(const QDate &dateDebut, const Q
 
     tableModel->clear();
     QStringList headers;
-    headers << "ID Vente" << "Date" << "Client" << "Montant total" << "Remise" << "Subtotal";
+    headers << "ID Vente" << "Date" << "Client" << "Total" << "Remise" << "Grand Total";
     tableModel->setHorizontalHeaderLabels(headers);
 
     QList<Vente> ventes = m_modeleRapport->getVenteParPlageDeDate(dateDebut, dateFin);
@@ -165,7 +165,7 @@ bool ControleurRapport::genererHistoriqueDeVenteParClient(int id_client, const Q
 
     tableModel->clear();
     QStringList headers;
-    headers << "ID Vente" << "Date" << "Client" << "Montant total" << "Remise" << "Subtotal";
+    headers << "ID Vente" << "Date" << "Client" << "Total" << "Remise" << "Grand Total";
     tableModel->setHorizontalHeaderLabels(headers);
 
     QList<Vente> ventes = m_modeleRapport->getVenteByClientDansPlageDeDate(id_client, dateDebut, dateFin);

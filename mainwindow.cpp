@@ -26,23 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainTabWidget->tabBar()->setStyle(new HorizontalTabStyle);
 
 
-
-
-
     //HAUTEUR VARIABLE
     ui->mainTabWidget->tabBar()->setExpanding(false);
     ui->mainTabWidget->tabBar()->setMinimumHeight(ui->mainTabWidget->height());
-
-
-
-
-
-
-
-
-
-
-
 
 
     ui->mainTabWidget->setCurrentIndex(0); //Ouvre l'application à la tab vente (pseudo home)
@@ -60,8 +46,6 @@ MainWindow::MainWindow(QWidget *parent) :
     else qDebug() << db.databaseName();
 
 
-
-
     ui->group_box_client->setGraphicsEffect(ShadowEffect::createShadow(this));
     ui->group_box_ajouter_produit_panier->setGraphicsEffect(ShadowEffect::createShadow(this));
     ui->group_box_panier->setGraphicsEffect(ShadowEffect::createShadow(this));
@@ -71,9 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->group_box_selection_rapport->setGraphicsEffect(ShadowEffect::createShadow(this));
 
 
-
-
-
     //Initialisation des modeles
     m_modeleClient = new ModeleClient(this);
     m_modeleProduit = new ModeleProduit(this);
@@ -81,20 +62,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_modeleRapport = new ModeleRapport(this);
 
 
-
-
-
-
     //Initialisation des contrôleurs
     m_controleurClient = new ControleurClient(this, m_modeleClient);
     m_controleurProduit = new ControleurProduit(this, m_modeleProduit);
     m_controleurVente = new ControleurVente(this, m_modeleClient, m_modeleProduit, m_modeleVente);
     m_controleurRapport = new ControleurRapport(this, m_modeleRapport, m_modeleClient, m_modeleProduit);
-
-
-
-
-
 
 
     //Configurer les tabs
@@ -105,14 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
     raffraichirPanierTableView();
 
 
-
-
-
-
     //Charger les données dans les tables
     chargerTableClient();
     chargerTableProduit();
-
 
 
     connect(m_controleurVente, SIGNAL(totalsAChange(QVariantMap)), this, SLOT(gererChangementTotals(QVariantMap)));
@@ -131,14 +98,9 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 
 
-
-
-
 //---------- Utilité en relation avec la tab VENTE -------------
 
-
 //Recherche client
-
 void MainWindow::remplirListeClient(QList<Client>& clients)
 {
     ui->combo_box_liste_client->clear();
@@ -154,8 +116,8 @@ void MainWindow::remplirListeClient(QList<Client>& clients)
 
 }
 
-// Recherche et ajout produit
 
+// Recherche et ajout produit
 void MainWindow::remplirProduitDisponible(const QList<Produit>& produits)
 {
     ui->combo_box_produit_disponible->clear();
@@ -214,18 +176,13 @@ void MainWindow::raffraichirPanierTableView()
         elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.remise, "Ar")));
         elementsLigne.append(new QStandardItem(QLocale(QLocale::French, QLocale::Madagascar).toCurrencyString(element.subtotal_composant, "Ar")));
 
-
-
         m_panierTableModel->appendRow(elementsLigne);
     }
     ui->table_view_panier->resizeColumnsToContents();
 }
 
 
-
-
 //Totals
-
 void MainWindow::gererChangementTotals(const QVariantMap& totals)
 {
     QLocale locale(QLocale::French, QLocale::Madagascar);
@@ -264,7 +221,6 @@ void MainWindow::gererChangementTotals(const QVariantMap& totals)
 
 //---------- Utilité en relation avec la tab RAPPORT -------------
 
-
 void MainWindow::configurerRapportTab()
 {
     m_rapportTableModel = new QStandardItemModel(this);
@@ -287,8 +243,6 @@ void MainWindow::configurerRapportTab()
     ui->date_edit_jusque->setDate(dateCourant);
     ui->spin_box_annee->setRange(2000, dateCourant.year());
     ui->spin_box_annee->setValue(QDate::currentDate().year());
-
-
 
     on_radio_button_plage_date_clicked();
 }
@@ -316,6 +270,7 @@ void MainWindow::chargerTableClient()
     ui->tableView_clients->resizeColumnsToContents();
 }
 
+
 int MainWindow::getIdClientSelectionneDansTableClient()
 {
     QModelIndexList ligneSelectionne = ui->tableView_clients->selectionModel()->selectedRows();
@@ -323,7 +278,6 @@ int MainWindow::getIdClientSelectionneDansTableClient()
     QModelIndex idIndex = m_clientTableModel->index(ligneSelectionne.first().row(), 0); // ID est dans la première colonne
     return m_clientTableModel->data(idIndex, Qt::UserRole + 1).toInt(); // ID est stocké dans UserRole+1
 }
-
 
 
 
@@ -336,6 +290,7 @@ void MainWindow::configurerProduitTab()
     ui->tableView_produits->setModel(m_produitTableModel);
 }
 
+
 void MainWindow::chargerTableProduit()
 {
     if (!m_controleurProduit || !m_produitTableModel) {
@@ -343,8 +298,9 @@ void MainWindow::chargerTableProduit()
         return;
     }
     m_controleurProduit->chargerProduitsDansTableModel(m_produitTableModel, ui->input_rechercher_produit->text());
-    ui->tableView_produits->resizeColumnsToContents();
+    //ui->tableView_produits->resizeColumnsToContents();
 }
+
 
 int MainWindow::getIdProduitSelectionneDansTableProduit()
 {
@@ -378,19 +334,12 @@ void MainWindow::on_mainTabWidget_currentChanged(int index)
 }
 
 
-
-
-
-
-
 //------------------------------- SLOT --------------------------------------
-
 
 //-------------- VENTE TAB SLOT -----------------
 
 
 //Recherche client
-
 void MainWindow::on_input_rechercher_client_textChanged(const QString &arg1)
 {
     if (!m_controleurVente) return;
@@ -408,6 +357,7 @@ void MainWindow::on_input_rechercher_client_textChanged(const QString &arg1)
 
 }
 
+
 void MainWindow::on_combo_box_liste_client_currentIndexChanged(int index)
 {
     if (!m_controleurVente) return;
@@ -421,8 +371,8 @@ void MainWindow::on_combo_box_liste_client_currentIndexChanged(int index)
 
 }
 
-//Recherche et ajout produit
 
+//Recherche et ajout produit
 void MainWindow::on_input_recherche_produit_textChanged(const QString &arg1)
 {
     if (!m_controleurVente) return;
@@ -442,9 +392,7 @@ void MainWindow::on_combo_box_produit_disponible_currentIndexChanged(int index)
 }
 
 
-
 //Panier
-
 void MainWindow::on_bouton_ajouter_au_panier_clicked()
 {
     if (!m_controleurVente) {
@@ -488,7 +436,6 @@ void MainWindow::on_bouton_ajouter_au_panier_clicked()
 }
 
 
-
 void MainWindow::on_input_montant_remise_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1);
@@ -514,7 +461,6 @@ void MainWindow::on_input_montant_remise_textChanged(const QString &arg1)
         }
     }
 }
-
 
 
 void MainWindow::on_bouton_supprimer_du_panier_clicked()
@@ -549,10 +495,8 @@ void MainWindow::on_spin_box_taux_remise_valueChanged(double arg1)
     }
 }
 
+
 //Finaliser
-
-
-
 void MainWindow::on_bouton_finaliser_clicked()
 {
     if (!m_controleurVente) {
@@ -583,7 +527,6 @@ void MainWindow::on_bouton_finaliser_clicked()
 }
 
 
-
 void MainWindow::on_bouton_annuler_clicked()
 {
     if (!m_controleurVente) return;
@@ -598,10 +541,7 @@ void MainWindow::on_bouton_annuler_clicked()
 
 
 
-
 //-------------- RAPPORT TAB SLOT -----------------
-
-
 
 void MainWindow::on_input_recherche_client_textChanged(const QString &arg1)
 {
@@ -618,7 +558,6 @@ void MainWindow::on_input_recherche_client_textChanged(const QString &arg1)
         ui->combo_box_selectionner_client->setCurrentIndex(1);
     }
 }
-
 
 
 void MainWindow::on_boutton_generer_rapport_clicked()
@@ -705,7 +644,6 @@ void MainWindow::on_radio_button_plage_date_clicked()
 }
 
 
-
 void MainWindow::on_radio_button_par_mois_clicked()
 {
     ui->date_edit_a->setEnabled(false);
@@ -738,12 +676,14 @@ void MainWindow::on_input_rechercher_client_2_textChanged(const QString &text)
     chargerTableClient();
 }
 
+
 void MainWindow::on_bouton_ajouter_client_clicked()
 {
     if(!m_controleurClient) return;
     m_gestion_client_dialog = new GestionClientDialog(this, m_controleurClient, 0);
     if(m_gestion_client_dialog->exec() == QDialog::Accepted) chargerTableClient();
 }
+
 
 void MainWindow::on_bouton_modifier_client_clicked()
 {
@@ -756,6 +696,7 @@ void MainWindow::on_bouton_modifier_client_clicked()
     m_gestion_client_dialog = new GestionClientDialog(this, m_controleurClient, id_client);
     if (m_gestion_client_dialog->exec() == QDialog::Accepted) chargerTableClient();
 }
+
 
 void MainWindow::on_bouton_supprimer_client_clicked()
 {
@@ -788,7 +729,6 @@ void MainWindow::on_tableView_clients_doubleClicked(const QModelIndex &index)
     Q_UNUSED(index);
     on_bouton_modifier_client_clicked();
 }
-
 
 
 //-------------- PRODUIT TAB SLOT -----------------

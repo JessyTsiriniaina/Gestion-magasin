@@ -27,14 +27,15 @@ void ControleurProduit::remplirLigneProduit(QStandardItemModel *tableModel, cons
 
     QStandardItem* quantiteStockItem = new QStandardItem(QString::number(produit.quantite_stock_en_unite_base, 'f', 3));
     quantiteStockItem->setFlags(quantiteStockItem->flags() & ~Qt::ItemIsEditable);
-    quantiteStockItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    quantiteStockItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     QStandardItem* uniteBaseItem = new QStandardItem(produit.unite_base);
     uniteBaseItem->setFlags(uniteBaseItem->flags() & ~Qt::ItemIsEditable);
+    uniteBaseItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     QStandardItem* remiseItem = new QStandardItem(QString(QString::number(produit.remise_pourcentage, 'f', 2) + "%"));
     remiseItem->setFlags(remiseItem->flags() & ~Qt::ItemIsEditable);
-    remiseItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    remiseItem->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
 
     ligneItems << idItem << nomItem << uniteBaseItem  << remiseItem << quantiteStockItem ;
@@ -49,7 +50,7 @@ bool ControleurProduit::chargerProduitsDansTableModel(QStandardItemModel* tableM
 
     tableModel->clear();
     QStringList headers;
-    headers << "ID" << "Nom" << "Unité de base" << "Remise"  << "Quantité en stock (en unité de base)";
+    headers << "ID" << "Nom de produit" << "Unité de base" << "Remise"  << "Quantité en stock (en unité de base)";
     tableModel->setHorizontalHeaderLabels(headers);
 
 
